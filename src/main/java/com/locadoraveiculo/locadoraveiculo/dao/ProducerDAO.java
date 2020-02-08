@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
@@ -19,4 +20,14 @@ public class ProducerDAO {
         return producer;
     }
 
+    public List<Producer> findAll() {
+        return em.createQuery("select p from Producer p").getResultList();
+    }
+
+    public void delete(Long id) {
+        Producer producerTemp = em.find(Producer.class, id);
+
+        em.remove(producerTemp);
+        em.flush();
+    }
 }

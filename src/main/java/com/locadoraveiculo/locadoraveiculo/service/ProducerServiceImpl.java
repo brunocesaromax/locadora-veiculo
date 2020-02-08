@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -17,5 +18,16 @@ public class ProducerServiceImpl implements ProducerService{
     @Override
     public Producer save(Producer producer) {
         return producerDAO.save(producer);
+    }
+
+    @Override
+    public List<Producer> findAll() {
+        return producerDAO.findAll();
+    }
+
+    @Transactional
+    @Override
+    public void delete(Long id) {
+        producerDAO.delete(id);
     }
 }
