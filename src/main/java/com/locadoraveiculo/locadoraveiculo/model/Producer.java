@@ -4,10 +4,7 @@ import com.locadoraveiculo.locadoraveiculo.constraint.UniqueProducerName;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -15,6 +12,20 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @UniqueProducerName
 public class Producer {
+
+//    @Id
+////    @GeneratedValue(strategy = GenerationType.AUTO) // O Banco de dados escolhe o melhor para a ação de gerar o ID
+////    @GeneratedValue(strategy = GenerationType.SEQUENCE) // Banco de dados usando sequence (Oracle utiliza)
+////    @GeneratedValue(strategy = GenerationType.TABLE) // Cria nova tabela no BD e utiliza as tuplas como id nas outras tabelas
+//    @GeneratedValue(strategy = GenerationType.IDENTITY) // Banco de dados incrementa a primary key
+////    @Column(name = "code") Nome na tabela do banco de dados
+//    private Long id;
+
+    /*@Id
+    @TableGenerator(name = "producer_generator", table = "CODE_GENERATOR", pkColumnName = "ENTIDADE",
+    valueColumnName = "ALLOCATION", allocationSize = 5)
+    @GeneratedValue(generator = "producer_generator", strategy = GenerationType.TABLE)
+    private Long id;*/
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
