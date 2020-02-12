@@ -1,5 +1,7 @@
 package com.locadoraveiculo.locadoraveiculo.exceptionHandler;
 
+import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
+import com.locadoraveiculo.locadoraveiculo.exception.UniqueProducerNameException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -30,6 +32,24 @@ public class LocadoraVeiculoHandler extends ResponseEntityExceptionHandler {
         List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
 
         return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler({UniqueProducerNameException.class})
+    public ResponseEntity<Object> handleUniqueProducerNameException(Exception ex, WebRequest request) {
+        String msgUser = messageSource.getMessage("producer.unique.name", null, LocaleContextHolder.getLocale());
+        String msgDev = ex.toString();
+        List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
+
+        return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler({NotFoundException.class})
+    public ResponseEntity<Object> handleNotFoundException(Exception ex, WebRequest request) {
+        String msgUser = messageSource.getMessage("resource.not-found", null, LocaleContextHolder.getLocale());
+        String msgDev = ex.toString();
+        List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
+
+        return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @Getter

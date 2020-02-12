@@ -10,4 +10,6 @@ public interface ProducerService {
     List<Producer> findAll();
 
     void delete(Long id);
+
+    Producer update(Long producerId, Producer producer) ;
 }

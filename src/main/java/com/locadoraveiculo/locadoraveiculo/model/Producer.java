@@ -1,5 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.model;
 
+import com.locadoraveiculo.locadoraveiculo.constraint.UniqueProducerName;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Setter
 @Getter
+@UniqueProducerName
 public class Producer {
 
     @Id

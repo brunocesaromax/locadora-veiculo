@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
@@ -16,7 +18,7 @@ public class ProducerDAO {
     private final EntityManager em;
 
     public Producer save(Producer producer) {
-        em.persist(producer);
+        em.merge(producer); // Salvar ou atualizar um novo objeto
         return producer;
     }
 
@@ -29,5 +31,19 @@ public class ProducerDAO {
 
         em.remove(producerTemp);
         em.flush();
+    }
+
+    public Optional<Producer> findByName(String name) {
+        Producer producerPersisted = null;
+
+        try {
+            producerPersisted = em.createQuery("select p from Producer p where p.name = :name", Producer.class)
+                    .setParameter("name", name).getSingleResult();
+        }catch (NoResultException exception){}
+        return Optional.ofNullable(producerPersisted);
+    }
+
+    public Producer findById(Long producerId) {
+        return em.find(Producer.class, producerId);
     }
 }
