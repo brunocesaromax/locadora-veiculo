@@ -18,6 +18,7 @@ public class CarModel {
     private String description;
 
     @ManyToOne
+    @JoinColumn(name="producer_id")
     private Producer producer;
 
     @Override
