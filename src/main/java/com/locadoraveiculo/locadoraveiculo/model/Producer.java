@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.Objects;
 
 @Entity
 @Setter
@@ -33,4 +34,19 @@ public class Producer {
 
     @NotEmpty
     private String name;
+
+    //O equals hash code padrão é o da Classe Object e é por região de memória
+    // HashCode deixa as buscas por hash mais rápidas
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Producer)) return false;
+        Producer producer = (Producer) o;
+        return Objects.equals(id, producer.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
