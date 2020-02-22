@@ -1,4 +1,4 @@
-package com.locadoraveiculo.locadoraveiculo.service;
+package com.locadoraveiculo.locadoraveiculo.exception;
 
 public class CarModelException extends RuntimeException {
     public CarModelException(String s) {

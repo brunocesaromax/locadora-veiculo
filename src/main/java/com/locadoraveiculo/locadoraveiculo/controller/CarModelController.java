@@ -20,8 +20,8 @@ public class CarModelController {
     private final CarModelService carModelService;
 
     @PostMapping
-    public ResponseEntity<CarModel> save(@Valid @RequestBody CarModel producer){
-        return ResponseEntity.status(HttpStatus.CREATED).body(carModelService.save(producer));
+    public ResponseEntity<CarModel> save(@Valid @RequestBody CarModel carModel){
+        return ResponseEntity.status(HttpStatus.CREATED).body(carModelService.save(carModel));
     }
 
     @GetMapping

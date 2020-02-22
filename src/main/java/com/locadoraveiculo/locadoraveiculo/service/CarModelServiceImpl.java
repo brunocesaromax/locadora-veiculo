@@ -1,8 +1,11 @@
 package com.locadoraveiculo.locadoraveiculo.service;
 
 import com.locadoraveiculo.locadoraveiculo.dao.CarModelDAO;
+import com.locadoraveiculo.locadoraveiculo.exception.CarModelException;
+import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
 import com.locadoraveiculo.locadoraveiculo.model.CarModel;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
@@ -34,18 +37,25 @@ public class CarModelServiceImpl implements CarModelService{
 
     @Override
     public List<CarModel> findAll() {
-        return null;
+        return carModelDAO.findAll();
     }
 
     @Transactional
     @Override
     public void delete(Long id) {
-
+        carModelDAO.delete(id);
     }
 
     @Transactional
     @Override
     public CarModel update(Long carModelId, CarModel carModel) {
-        return null;
+        CarModel carModelOld = carModelDAO.findById(carModelId);
+
+        if (carModelOld == null){
+            throw new NotFoundException();
+        }else{
+            BeanUtils.copyProperties(carModel, carModelOld, "id", "producer");
+            return carModelDAO.save(carModelOld);
+        }
     }
 }

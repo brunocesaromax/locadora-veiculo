@@ -22,7 +22,7 @@ public class CarModelDAO {
         return carModel;
     }
 
-    public List<Producer> findAll() {
+    public List<CarModel> findAll() {
         return em.createQuery("select cm from CarModel cm").getResultList();
     }
 

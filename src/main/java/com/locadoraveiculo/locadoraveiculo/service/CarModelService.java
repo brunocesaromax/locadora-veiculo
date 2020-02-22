@@ -1,5 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.service;
 
+import com.locadoraveiculo.locadoraveiculo.exception.CarModelException;
 import com.locadoraveiculo.locadoraveiculo.model.CarModel;
 
 import java.util.List;
