@@ -1,5 +1,9 @@
 package com.locadoraveiculo.locadoraveiculo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +19,7 @@ import java.util.Objects;
 @Entity
 @Setter
 @Getter
-public class Car {
+public class Car implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +45,7 @@ public class Car {
     @ManyToMany
     private List<Accessory> accessories;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "car") // Foi mapeado na classe Aluguel no atributo 'car'
     private List<Rent> rents;
 

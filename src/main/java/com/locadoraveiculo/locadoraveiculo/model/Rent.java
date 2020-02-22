@@ -1,5 +1,7 @@
 package com.locadoraveiculo.locadoraveiculo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +26,7 @@ public class Rent {
     private BigDecimal totalValue;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "car_id")
     @NotNull
     private Car car;

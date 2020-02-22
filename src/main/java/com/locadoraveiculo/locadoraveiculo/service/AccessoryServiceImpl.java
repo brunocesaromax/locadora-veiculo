@@ -3,7 +3,6 @@ package com.locadoraveiculo.locadoraveiculo.service;
 import com.locadoraveiculo.locadoraveiculo.dao.AccessoryDAO;
 import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
 import com.locadoraveiculo.locadoraveiculo.model.Accessory;
-import com.locadoraveiculo.locadoraveiculo.model.CarModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

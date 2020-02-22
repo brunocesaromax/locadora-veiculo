@@ -1,9 +1,7 @@
 package com.locadoraveiculo.locadoraveiculo.controller;
 
 import com.locadoraveiculo.locadoraveiculo.model.Accessory;
-import com.locadoraveiculo.locadoraveiculo.model.CarModel;
 import com.locadoraveiculo.locadoraveiculo.service.AccessoryService;
-import com.locadoraveiculo.locadoraveiculo.service.CarModelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

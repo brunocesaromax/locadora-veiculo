@@ -1,8 +1,8 @@
 package com.locadoraveiculo.locadoraveiculo.exceptionHandler;
 
+import com.locadoraveiculo.locadoraveiculo.exception.CarModelException;
 import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
 import com.locadoraveiculo.locadoraveiculo.exception.UniqueProducerNameException;
-import com.locadoraveiculo.locadoraveiculo.exception.CarModelException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;

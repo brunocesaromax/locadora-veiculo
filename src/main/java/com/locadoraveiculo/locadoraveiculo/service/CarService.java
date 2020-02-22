@@ -12,4 +12,8 @@ public interface CarService {
     void delete(Long id);
 
     Car update(Long accessoryId, Car car);
+
+    Car findById(Long carId);
+
+    Car findByIdWithAccessories(Long carId);
 }

@@ -1,7 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.dao;
 
 import com.locadoraveiculo.locadoraveiculo.model.CarModel;
-import com.locadoraveiculo.locadoraveiculo.model.Producer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

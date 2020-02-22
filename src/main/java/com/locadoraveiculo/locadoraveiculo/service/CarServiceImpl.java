@@ -6,8 +6,8 @@ import com.locadoraveiculo.locadoraveiculo.model.Car;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -38,11 +38,22 @@ public class CarServiceImpl implements CarService {
     public Car update(Long accessoryId, Car car) {
         Car carOld = carDAO.findById(accessoryId);
 
-        if (carOld == null){
+        if (carOld == null) {
             throw new NotFoundException();
-        }else{
+        } else {
             BeanUtils.copyProperties(car, carOld, "id");
             return carDAO.save(carOld);
         }
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Car findById(Long carId) {
+        return carDAO.findById(carId);
+    }
+
+    @Transactional(readOnly = true)
+    public Car findByIdWithAccessories(Long carId) {
+        return carDAO.findByIdWithAccessories(carId);
     }
 }

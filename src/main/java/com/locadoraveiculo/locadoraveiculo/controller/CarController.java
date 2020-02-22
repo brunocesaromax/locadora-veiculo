@@ -29,6 +29,11 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findAll());
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<Car> findById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(carService.findByIdWithAccessories(id));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         carService.delete(id);
