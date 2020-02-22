@@ -40,6 +40,9 @@ public class Car {
     @ManyToMany
     private List<Accessory> accessories;
 
+    @OneToMany(mappedBy = "car") // Foi mapeado na classe Aluguel no atributo 'car'
+    private List<Rent> rents;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
