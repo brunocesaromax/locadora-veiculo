@@ -20,4 +20,6 @@ public interface CarModelService {
     List<CarModel> findAllByProducerName(String producerName);
 
     List<CarModel> findAllByFilter(CarModelFilter filter);
+
+    List<Object[]> getProjection();
 }

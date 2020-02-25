@@ -77,4 +77,9 @@ public class CarModelDAO {
 
         return models;
     }
+
+    public List<Object[]> getProjection() {
+        List<Object[]> results = em.createQuery("select cm.description, cm.category from CarModel cm").getResultList();
+        return results;
+    }
 }

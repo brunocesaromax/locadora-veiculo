@@ -45,6 +45,11 @@ public class CarModelController {
         return ResponseEntity.status(HttpStatus.OK).body(carModelService.findAllByProducerName(producerName));
     }
 
+    @GetMapping(params = "projection")
+    public ResponseEntity<List<Object[]>> getProjection(){
+        return ResponseEntity.status(HttpStatus.OK).body(carModelService.getProjection());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         carModelService.delete(id);

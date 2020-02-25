@@ -74,4 +74,9 @@ public class CarModelServiceImpl implements CarModelService{
     public List<CarModel> findAllByFilter(CarModelFilter filter) {
         return carModelDAO.findAllByFilter(filter);
     }
+
+    @Override
+    public List<Object[]> getProjection() {
+        return carModelDAO.getProjection();
+    }
 }
