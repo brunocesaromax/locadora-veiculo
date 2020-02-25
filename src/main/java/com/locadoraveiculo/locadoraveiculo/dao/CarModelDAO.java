@@ -41,4 +41,9 @@ public class CarModelDAO {
         return em.createQuery("select cm.producer.name from CarModel cm",String.class).getResultList();
     }
 
+    public List<CarModel> findAllByProducerName(String producerName) {
+        return em.createQuery("select cm from CarModel cm where cm.producer.name = :producerName",CarModel.class)
+                .setParameter("producerName", producerName)
+                .getResultList();
+    }
 }

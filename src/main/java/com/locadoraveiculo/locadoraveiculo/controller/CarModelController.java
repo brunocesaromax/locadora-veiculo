@@ -34,6 +34,11 @@ public class CarModelController {
         return ResponseEntity.status(HttpStatus.OK).body(carModelService.findAllProducerNames());
     }
 
+    @GetMapping(params = "producerName")
+    public ResponseEntity<List<CarModel>> findAllByProducerName(@RequestParam String producerName){
+        return ResponseEntity.status(HttpStatus.OK).body(carModelService.findAllByProducerName(producerName));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         carModelService.delete(id);

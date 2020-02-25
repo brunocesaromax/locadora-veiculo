@@ -63,4 +63,9 @@ public class CarModelServiceImpl implements CarModelService{
     public List<String> findAllProducerNames() {
         return carModelDAO.findProducerNames();
     }
+
+    @Override
+    public List<CarModel> findAllByProducerName(String producerName) {
+        return carModelDAO.findAllByProducerName(producerName);
+    }
 }

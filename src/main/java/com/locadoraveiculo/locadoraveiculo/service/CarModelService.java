@@ -15,4 +15,6 @@ public interface CarModelService {
     CarModel update(Long carModelId, CarModel carModel) ;
 
     List<String> findAllProducerNames();
+
+    List<CarModel> findAllByProducerName(String producerName);
 }
