@@ -21,6 +21,9 @@ public class CarModel {
     @JoinColumn(name="producer_id")
     private Producer producer;
 
+    @Enumerated(EnumType.STRING) //ou EnumType.ORDINAL
+    private Category category;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
