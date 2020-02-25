@@ -50,6 +50,11 @@ public class Rent {
     @Temporal(TemporalType.TIMESTAMP)
     private Date returnDate;
 
+    @ManyToOne
+    @JoinColumn(name = "driver_id")
+    @NotNull
+    private Driver driver;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
