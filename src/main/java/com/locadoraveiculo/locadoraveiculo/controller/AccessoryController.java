@@ -29,6 +29,11 @@ public class AccessoryController {
         return ResponseEntity.status(HttpStatus.OK).body(accessoryService.findAll());
     }
 
+    @GetMapping(params = "carModelDescription")
+    public ResponseEntity<List<Accessory>> findAllByCarModelDescription(@RequestParam String carModelDescription){
+        return ResponseEntity.status(HttpStatus.OK).body(accessoryService.findAllByCarModelDescription(carModelDescription));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         accessoryService.delete(id);

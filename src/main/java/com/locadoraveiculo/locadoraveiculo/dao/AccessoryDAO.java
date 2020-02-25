@@ -25,6 +25,12 @@ public class AccessoryDAO {
         return em.createQuery("select ac from Accessory ac", Accessory.class).getResultList();
     }
 
+    public List<Accessory> findAllByCarModel(String modelCar) {
+        return em.createQuery("select ac from Car c join c.accessories ac where c.carModel.description = :modelCar", Accessory.class)
+                .setParameter("modelCar", modelCar)
+                .getResultList();
+    }
+
     @Transactional
     public void delete(Long id) {
         Accessory accessoryTemp = em.find(Accessory.class, id);

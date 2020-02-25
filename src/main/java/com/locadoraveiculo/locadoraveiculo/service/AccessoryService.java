@@ -12,4 +12,6 @@ public interface AccessoryService {
     void delete(Long id);
 
     Accessory update(Long accessoryId, Accessory accessory);
+
+    List<Accessory> findAllByCarModelDescription(String carModelDescription);
 }

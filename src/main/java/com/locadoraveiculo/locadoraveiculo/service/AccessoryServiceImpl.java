@@ -43,4 +43,9 @@ public class AccessoryServiceImpl implements AccessoryService {
             return accessoryDAO.save(accessoryOld);
         }
     }
+
+    @Override
+    public List<Accessory> findAllByCarModelDescription(String carModelDescription) {
+        return accessoryDAO.findAllByCarModel(carModelDescription);
+    }
 }
