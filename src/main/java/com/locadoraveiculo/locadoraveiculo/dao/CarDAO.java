@@ -25,7 +25,7 @@ public class CarDAO {
     }
 
     public List<Car> findAll() {
-        return em.createQuery("select c from Car c").getResultList();
+        return em.createQuery("select c from Car c", Car.class).getResultList();
     }
 
     @Transactional

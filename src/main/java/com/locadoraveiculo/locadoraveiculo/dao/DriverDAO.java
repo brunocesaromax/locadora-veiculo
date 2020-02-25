@@ -1,6 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.dao;
 
-import com.locadoraveiculo.locadoraveiculo.model.Rent;
+import com.locadoraveiculo.locadoraveiculo.model.Driver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -11,29 +11,29 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-public class RentDAO {
+public class DriverDAO {
 
     @PersistenceContext
     private final EntityManager em;
 
-    public Rent save(Rent rent) {
-        em.merge(rent);
-        return rent;
+    public Driver save(Driver driver) {
+        em.merge(driver);
+        return driver;
     }
 
-    public List<Rent> findAll() {
-        return em.createQuery("select r from Rent r", Rent.class).getResultList();
+    public List<Driver> findAll() {
+        return em.createQuery("select d from Driver d", Driver.class).getResultList();
     }
 
     @Transactional
     public void delete(Long id) {
-        Rent rentTemp = em.find(Rent.class, id);
+        Driver driverTemp = em.find(Driver.class, id);
 
-        em.remove(rentTemp);
+        em.remove(driverTemp);
         em.flush();
     }
 
-    public Rent findById(Long rentId) {
-        return em.find(Rent.class, rentId);
+    public Driver findById(Long driverId) {
+        return em.find(Driver.class, driverId);
     }
 }

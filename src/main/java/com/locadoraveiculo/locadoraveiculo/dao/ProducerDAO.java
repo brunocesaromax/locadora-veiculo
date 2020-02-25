@@ -23,7 +23,7 @@ public class ProducerDAO {
     }
 
     public List<Producer> findAll() {
-        return em.createQuery("select p from Producer p").getResultList();
+        return em.createQuery("select p from Producer p", Producer.class).getResultList();
     }
 
     public void delete(Long id) {
@@ -39,7 +39,8 @@ public class ProducerDAO {
         try {
             producerPersisted = em.createQuery("select p from Producer p where p.name = :name", Producer.class)
                     .setParameter("name", name).getSingleResult();
-        }catch (NoResultException exception){}
+        } catch (NoResultException exception) {
+        }
         return Optional.ofNullable(producerPersisted);
     }
 

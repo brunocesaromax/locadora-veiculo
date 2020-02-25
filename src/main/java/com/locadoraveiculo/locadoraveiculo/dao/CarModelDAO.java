@@ -22,7 +22,7 @@ public class CarModelDAO {
     }
 
     public List<CarModel> findAll() {
-        return em.createQuery("select cm from CarModel cm").getResultList();
+        return em.createQuery("select cm from CarModel cm", CarModel.class).getResultList();
     }
 
     @Transactional

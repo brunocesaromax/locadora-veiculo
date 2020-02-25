@@ -22,7 +22,7 @@ public class AccessoryDAO {
     }
 
     public List<Accessory> findAll() {
-        return em.createQuery("select ac from Accessory ac").getResultList();
+        return em.createQuery("select ac from Accessory ac", Accessory.class).getResultList();
     }
 
     @Transactional
