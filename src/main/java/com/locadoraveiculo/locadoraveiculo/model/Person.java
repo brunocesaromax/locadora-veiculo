@@ -32,4 +32,8 @@ public abstract class Person { //Por si só não faz sentido
 
     @NotEmpty
     private String documentIdentifier;//CPF
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private Gender gender;
 }
