@@ -1,6 +1,7 @@
 package com.locadoraveiculo.locadoraveiculo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -30,10 +33,22 @@ public class Rent {
     @NotNull
     private Car car;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)// Já é o valor default
     @NotNull
     @Valid
     private InsurancePolicy insurancePolicy;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
+    @Temporal(TemporalType.DATE)
+    private Calendar requestDate = Calendar.getInstance(); //Data de hoje
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deliveryDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date returnDate;
 
     @Override
     public boolean equals(Object o) {
