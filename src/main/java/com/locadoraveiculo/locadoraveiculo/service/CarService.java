@@ -16,4 +16,6 @@ public interface CarService {
     Car findById(Long carId);
 
     Car findByIdWithAccessories(Long carId);
+
+    List<Object[]> findDataGroupByCar();
 }

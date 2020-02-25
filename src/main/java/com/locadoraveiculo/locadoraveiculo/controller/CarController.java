@@ -29,6 +29,11 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findAll());
     }
 
+    @GetMapping(params = "groupByCar")
+    public ResponseEntity<List<Object[]>> findDataGroupByCar(){
+        return ResponseEntity.status(HttpStatus.OK).body(carService.findDataGroupByCar());
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<Car> findById(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(carService.findByIdWithAccessories(id));

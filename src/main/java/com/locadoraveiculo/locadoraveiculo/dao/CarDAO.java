@@ -19,6 +19,7 @@ public class CarDAO {
     @PersistenceContext
     private final EntityManager em;
 
+    @Transactional
     public Car save(Car car) {
         em.merge(car);
         return car;
@@ -51,5 +52,15 @@ public class CarDAO {
 
         TypedQuery<Car> query = em.createQuery(q);
         return query.getSingleResult();
+    }
+
+    public List<Object[]> findDataGroupByCar() {
+        List<Object[]> results = em.createQuery(
+                "select c, count(r), max(r.totalValue), avg(r.totalValue) " +
+                        "from Car c join c.rents r " +
+                        "group by c " +
+                        "having count(r) > 1").getResultList();
+
+        return results;
     }
 }

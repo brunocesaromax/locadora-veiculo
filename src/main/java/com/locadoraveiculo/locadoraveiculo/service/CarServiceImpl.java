@@ -56,4 +56,9 @@ public class CarServiceImpl implements CarService {
     public Car findByIdWithAccessories(Long carId) {
         return carDAO.findByIdWithAccessories(carId);
     }
+
+    @Override
+    public List<Object[]> findDataGroupByCar() {
+        return carDAO.findDataGroupByCar();
+    }
 }
