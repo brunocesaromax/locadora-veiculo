@@ -47,4 +47,8 @@ public class ProducerDAO {
     public Producer findById(Long producerId) {
         return em.find(Producer.class, producerId);
     }
+
+    public List<String> findAllNames() {
+        return em.createQuery("select p.name from Producer p",String.class).getResultList();
+    }
 }

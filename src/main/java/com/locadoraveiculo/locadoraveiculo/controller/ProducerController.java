@@ -29,6 +29,11 @@ public class ProducerController {
         return ResponseEntity.status(HttpStatus.OK).body(producerService.findAll());
     }
 
+    @GetMapping("names")
+    public ResponseEntity<List<String>> findAllNames(){
+        return ResponseEntity.status(HttpStatus.OK).body(producerService.findAllNames());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         producerService.delete(id);

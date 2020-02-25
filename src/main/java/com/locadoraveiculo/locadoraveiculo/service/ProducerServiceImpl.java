@@ -45,4 +45,9 @@ public class ProducerServiceImpl implements ProducerService{
             return producerDAO.save(producerOld);
         }
     }
+
+    @Override
+    public List<String> findAllNames() {
+        return producerDAO.findAllNames();
+    }
 }

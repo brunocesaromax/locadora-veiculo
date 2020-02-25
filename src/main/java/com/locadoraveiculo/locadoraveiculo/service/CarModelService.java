@@ -13,4 +13,6 @@ public interface CarModelService {
     void delete(Long id);
 
     CarModel update(Long carModelId, CarModel carModel) ;
+
+    List<String> findAllProducerNames();
 }

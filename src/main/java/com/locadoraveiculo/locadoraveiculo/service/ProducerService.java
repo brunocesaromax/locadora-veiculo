@@ -12,4 +12,6 @@ public interface ProducerService {
     void delete(Long id);
 
     Producer update(Long producerId, Producer producer) ;
+
+    List<String> findAllNames();
 }

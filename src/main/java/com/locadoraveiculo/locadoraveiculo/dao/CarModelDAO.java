@@ -36,4 +36,9 @@ public class CarModelDAO {
     public CarModel findById(Long carModelId) {
         return em.find(CarModel.class, carModelId);
     }
+
+    public List<String> findProducerNames() {
+        return em.createQuery("select cm.producer.name from CarModel cm",String.class).getResultList();
+    }
+
 }

@@ -29,6 +29,11 @@ public class CarModelController {
         return ResponseEntity.status(HttpStatus.OK).body(carModelService.findAll());
     }
 
+    @GetMapping("producers/names")
+    public ResponseEntity<List<String>> findAllProducerNames(){
+        return ResponseEntity.status(HttpStatus.OK).body(carModelService.findAllProducerNames());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         carModelService.delete(id);

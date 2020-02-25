@@ -58,4 +58,9 @@ public class CarModelServiceImpl implements CarModelService{
             return carModelDAO.save(carModelOld);
         }
     }
+
+    @Override
+    public List<String> findAllProducerNames() {
+        return carModelDAO.findProducerNames();
+    }
 }
