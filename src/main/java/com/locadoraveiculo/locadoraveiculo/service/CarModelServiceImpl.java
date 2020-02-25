@@ -3,6 +3,7 @@ package com.locadoraveiculo.locadoraveiculo.service;
 import com.locadoraveiculo.locadoraveiculo.dao.CarModelDAO;
 import com.locadoraveiculo.locadoraveiculo.exception.CarModelException;
 import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
+import com.locadoraveiculo.locadoraveiculo.filter.CarModelFilter;
 import com.locadoraveiculo.locadoraveiculo.model.CarModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -67,5 +68,10 @@ public class CarModelServiceImpl implements CarModelService{
     @Override
     public List<CarModel> findAllByProducerName(String producerName) {
         return carModelDAO.findAllByProducerName(producerName);
+    }
+
+    @Override
+    public List<CarModel> findAllByFilter(CarModelFilter filter) {
+        return carModelDAO.findAllByFilter(filter);
     }
 }

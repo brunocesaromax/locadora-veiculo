@@ -1,5 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.controller;
 
+import com.locadoraveiculo.locadoraveiculo.filter.CarModelFilter;
 import com.locadoraveiculo.locadoraveiculo.model.CarModel;
 import com.locadoraveiculo.locadoraveiculo.service.CarModelService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,11 @@ public class CarModelController {
     @PostMapping
     public ResponseEntity<CarModel> save(@Valid @RequestBody CarModel carModel){
         return ResponseEntity.status(HttpStatus.CREATED).body(carModelService.save(carModel));
+    }
+
+    @PostMapping(params = "filter")
+    public ResponseEntity<List<CarModel>> findAllByFilter(@RequestBody CarModelFilter filter){
+        return ResponseEntity.status(HttpStatus.OK).body(carModelService.findAllByFilter(filter));
     }
 
     @GetMapping

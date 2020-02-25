@@ -1,6 +1,8 @@
 package com.locadoraveiculo.locadoraveiculo.dao;
 
+import com.locadoraveiculo.locadoraveiculo.filter.CarModelFilter;
 import com.locadoraveiculo.locadoraveiculo.model.CarModel;
+import com.locadoraveiculo.locadoraveiculo.model.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -38,12 +40,41 @@ public class CarModelDAO {
     }
 
     public List<String> findProducerNames() {
-        return em.createQuery("select cm.producer.name from CarModel cm",String.class).getResultList();
+        return em.createQuery("select cm.producer.name from CarModel cm", String.class).getResultList();
     }
 
     public List<CarModel> findAllByProducerName(String producerName) {
-        return em.createQuery("select cm from CarModel cm where cm.producer.name = :producerName",CarModel.class)
+        return em.createQuery("select cm from CarModel cm where cm.producer.name = :producerName", CarModel.class)
                 .setParameter("producerName", producerName)
                 .getResultList();
+    }
+
+    public List<CarModel> findAllByFilter(CarModelFilter filter) {
+        List<CarModel> models;
+        String jpql = "select cm from CarModel cm ";
+        StringBuilder whereClause = new StringBuilder("where ");
+
+        if (filter.getProducerName() != null) {
+            whereClause.append("cm.producer.name = ").append("'").append(filter.getProducerName()).append("'").append(" ");
+        }
+
+        if (filter.getCategories() != null && !filter.getCategories().isEmpty()) {
+            whereClause.append("and cm.category in (");
+
+            for (Category category : filter.getCategories()) {
+                whereClause.append("'").append(category).append("'").append(",");
+            }
+
+            whereClause.deleteCharAt(whereClause.length() - 1);
+            whereClause.append(")");
+        }
+
+        if (!whereClause.equals("where ")) {
+            models = em.createQuery(jpql.concat(whereClause.toString()), CarModel.class).getResultList();
+        } else {
+            models = em.createQuery(jpql, CarModel.class).getResultList();
+        }
+
+        return models;
     }
 }
