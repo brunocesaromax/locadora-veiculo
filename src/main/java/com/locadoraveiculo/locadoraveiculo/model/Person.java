@@ -10,12 +10,10 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-//Uma tabela com um nova coluna descrevendo o tipo
-//Forma bastante simples e perfomática
-//Cuidado ao usar Heranças
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//Menor perfomatico que SINGLE_TABLE, poré mais organizado
+@Inheritance(strategy = InheritanceType.JOINED)
 //Coluna que faz a discriminação
-@DiscriminatorColumn(name = "PERSON_TYPE", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "PERSON_TYPE", discriminatorType = DiscriminatorType.INTEGER)
 @Setter
 @Getter
 public abstract class Person { //Por si só não faz sentido

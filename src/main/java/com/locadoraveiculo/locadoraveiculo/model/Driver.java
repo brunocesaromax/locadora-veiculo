@@ -8,7 +8,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("DRIVER")
+@DiscriminatorValue("1")
 @Setter
 @Getter
 public class Driver extends Person {
