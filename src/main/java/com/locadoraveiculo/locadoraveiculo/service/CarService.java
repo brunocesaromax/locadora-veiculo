@@ -1,5 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.service;
 
+import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface CarService {
 
     Car findByIdWithAccessories(Long carId);
 
-    List<Object[]> findDataGroupByCar();
+    List<RentCarInfo> findDataGroupByCar();
 }

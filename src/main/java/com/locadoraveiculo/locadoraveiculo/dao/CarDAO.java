@@ -1,5 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.dao;
 
+import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
 import com.locadoraveiculo.locadoraveiculo.model.Car_;
 import lombok.RequiredArgsConstructor;
@@ -54,12 +55,12 @@ public class CarDAO {
         return query.getSingleResult();
     }
 
-    public List<Object[]> findDataGroupByCar() {
-        List<Object[]> results = em.createQuery(
-                "select c, count(r), max(r.totalValue), avg(r.totalValue) " +
+    public List<RentCarInfo> findDataGroupByCar() {
+        List<RentCarInfo> results = em.createQuery(
+                "select NEW com.locadoraveiculo.locadoraveiculo.info.RentCarInfo (c, count(r), max(r.totalValue), avg(r.totalValue)) " +
                         "from Car c join c.rents r " +
                         "group by c " +
-                        "having count(r) > 1").getResultList();
+                        "having count(r) > 1", RentCarInfo.class).getResultList();
 
         return results;
     }

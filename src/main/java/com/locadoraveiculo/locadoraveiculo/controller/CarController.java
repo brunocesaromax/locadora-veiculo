@@ -1,5 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.controller;
 
+import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
 import com.locadoraveiculo.locadoraveiculo.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class CarController {
     }
 
     @GetMapping(params = "groupByCar")
-    public ResponseEntity<List<Object[]>> findDataGroupByCar(){
+    public ResponseEntity<List<RentCarInfo>> findDataGroupByCar(){
         return ResponseEntity.status(HttpStatus.OK).body(carService.findDataGroupByCar());
     }
 
