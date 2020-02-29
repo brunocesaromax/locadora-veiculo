@@ -1,7 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.info;
 
 import com.locadoraveiculo.locadoraveiculo.model.Car;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

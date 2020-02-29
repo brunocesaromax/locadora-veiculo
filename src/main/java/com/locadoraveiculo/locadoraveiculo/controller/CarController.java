@@ -21,32 +21,38 @@ public class CarController {
     private final CarService carService;
 
     @PostMapping
-    public ResponseEntity<Car> save(@Valid @RequestBody Car car){
+    public ResponseEntity<Car> save(@Valid @RequestBody Car car) {
         return ResponseEntity.status(HttpStatus.CREATED).body(carService.save(car));
     }
 
     @GetMapping
-    public ResponseEntity<List<Car>> findAll(){
+    public ResponseEntity<List<Car>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findAll());
     }
 
     @GetMapping(params = "groupByCar")
-    public ResponseEntity<List<RentCarInfo>> findDataGroupByCar(){
+    public ResponseEntity<List<RentCarInfo>> findDataGroupByCar() {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findDataGroupByCar());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Car> findById(@PathVariable Long id){
+    public ResponseEntity<Car> findById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findByIdWithAccessories(id));
     }
 
     @GetMapping(params = "plate")
-    public ResponseEntity<Car> findById(@RequestParam String plate){
+    public ResponseEntity<Car> findById(@RequestParam String plate) {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findByPlate(plate));
     }
 
+    @GetMapping(params = "pagination")
+    public ResponseEntity<List<Car>> pagination(@RequestParam int first,
+                                                @RequestParam int pageSize) {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.pagination(first, pageSize));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id){
+    public ResponseEntity delete(@PathVariable Long id) {
         carService.delete(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

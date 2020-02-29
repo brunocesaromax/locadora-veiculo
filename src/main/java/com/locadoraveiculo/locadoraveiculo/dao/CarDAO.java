@@ -71,4 +71,17 @@ public class CarDAO {
                 .setParameter("plate", plate)
                 .getSingleResult();
     }
+
+    public List<Car> findWithPagination(int first, int pageSize) {
+        return em.createNamedQuery("Car.findAll", Car.class)
+                .setFirstResult(first)
+                .setMaxResults(pageSize)
+                .getResultList();
+        /*Consulta gerada vai ser do tipo:
+        * select c from Car c limit first, pageSize*/
+    }
+
+    public Long findTotalCars() {
+        return em.createQuery("select count(c) from Car c", Long.class).getSingleResult();
+    }
 }

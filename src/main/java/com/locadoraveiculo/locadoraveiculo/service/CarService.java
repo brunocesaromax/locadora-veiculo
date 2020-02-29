@@ -21,4 +21,6 @@ public interface CarService {
     List<RentCarInfo> findDataGroupByCar();
 
     Car findByPlate(String plate);
+
+    List<Car> pagination(int first, int pageSize);
 }

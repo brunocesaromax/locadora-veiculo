@@ -67,4 +67,9 @@ public class CarServiceImpl implements CarService {
     public Car findByPlate(String plate) {
         return carDAO.findByPlate(plate);
     }
+
+    @Override
+    public List<Car> pagination(int first, int pageSize) {
+        return carDAO.findWithPagination(first, pageSize);
+    }
 }
