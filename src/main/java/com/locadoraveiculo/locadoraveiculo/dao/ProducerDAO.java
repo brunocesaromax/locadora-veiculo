@@ -49,6 +49,13 @@ public class ProducerDAO {
     }
 
     public List<String> findAllNames() {
-        return em.createQuery("select p.name from Producer p",String.class).getResultList();
+        return em.createQuery("select p.name from Producer p", String.class).getResultList();
+    }
+
+    public List<Producer> pagination(int first, int pageSize) {
+        return em.createNamedQuery("Producer.findAll", Producer.class)
+                .setFirstResult(first)
+                .setMaxResults(pageSize)
+                .getResultList();
     }
 }

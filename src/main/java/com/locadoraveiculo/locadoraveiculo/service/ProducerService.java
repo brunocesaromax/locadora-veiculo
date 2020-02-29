@@ -14,4 +14,6 @@ public interface ProducerService {
     Producer update(Long producerId, Producer producer) ;
 
     List<String> findAllNames();
+
+    List<Producer> pagination(int first, int pageSize);
 }

@@ -4,10 +4,7 @@ import com.locadoraveiculo.locadoraveiculo.constraint.UniqueProducerName;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
@@ -15,6 +12,7 @@ import java.util.Objects;
 @Setter
 @Getter
 @UniqueProducerName
+@NamedQuery(name = "Producer.findAll", query = "select p from Producer p")
 public class Producer {
 
 //    @Id

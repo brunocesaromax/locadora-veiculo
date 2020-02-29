@@ -50,4 +50,9 @@ public class ProducerServiceImpl implements ProducerService{
     public List<String> findAllNames() {
         return producerDAO.findAllNames();
     }
+
+    @Override
+    public List<Producer> pagination(int first, int pageSize) {
+        return producerDAO.pagination(first, pageSize);
+    }
 }
