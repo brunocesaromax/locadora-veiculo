@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,5 +43,10 @@ public class RentServiceImpl implements RentService{
             BeanUtils.copyProperties(rent, rentOld, "id");
             return rentDAO.save(rentOld);
         }
+    }
+
+    @Override
+    public Long findAllByReturnDateInterval(Date start, Date end) {
+        return rentDAO.findAllByReturnDateInterval(start, end);
     }
 }

@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -36,4 +38,14 @@ public class RentDAO {
     public Rent findById(Long rentId) {
         return em.find(Rent.class, rentId);
     }
+
+    public Long findAllByReturnDateInterval(Date start, Date end) {
+        return em.createQuery("select count (r) " +
+                "from Rent r " +
+                "where r.returnDate between :start and :end", Long.class)
+                .setParameter("start", start, TemporalType.TIMESTAMP)
+                .setParameter("end", end, TemporalType.TIMESTAMP)
+                .getSingleResult();
+    }
+
 }
