@@ -27,7 +27,8 @@ public class CarDAO {
     }
 
     public List<Car> findAll() {
-        return em.createQuery("select c from Car c", Car.class).getResultList();
+//        return em.createQuery("select c from Car c", Car.class).getResultList();
+        return em.createNamedQuery("Car.findAll", Car.class).getResultList();
     }
 
     @Transactional
@@ -63,5 +64,11 @@ public class CarDAO {
                         "having count(r) > 1", RentCarInfo.class).getResultList();
 
         return results;
+    }
+
+    public Car findByPlate(String plate) {
+        return em.createNamedQuery("Car.findByPlate", Car.class)
+                .setParameter("plate", plate)
+                .getSingleResult();
     }
 }

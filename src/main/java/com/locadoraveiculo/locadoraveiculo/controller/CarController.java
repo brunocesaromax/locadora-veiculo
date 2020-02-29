@@ -40,6 +40,11 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findByIdWithAccessories(id));
     }
 
+    @GetMapping(params = "plate")
+    public ResponseEntity<Car> findById(@RequestParam String plate){
+        return ResponseEntity.status(HttpStatus.OK).body(carService.findByPlate(plate));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         carService.delete(id);

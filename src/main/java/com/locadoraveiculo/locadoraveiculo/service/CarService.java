@@ -19,4 +19,6 @@ public interface CarService {
     Car findByIdWithAccessories(Long carId);
 
     List<RentCarInfo> findDataGroupByCar();
+
+    Car findByPlate(String plate);
 }

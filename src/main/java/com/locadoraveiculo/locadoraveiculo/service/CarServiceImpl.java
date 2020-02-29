@@ -62,4 +62,9 @@ public class CarServiceImpl implements CarService {
     public List<RentCarInfo> findDataGroupByCar() {
         return carDAO.findDataGroupByCar();
     }
+
+    @Override
+    public Car findByPlate(String plate) {
+        return carDAO.findByPlate(plate);
+    }
 }

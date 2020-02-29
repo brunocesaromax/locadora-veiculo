@@ -16,6 +16,14 @@ import java.util.Objects;
 @Entity
 @Setter
 @Getter
+/*Os nomes de namedQueries devem ser únicos no sistema,
+ * Duas entidades não podem compartilhar o mesmo namedQuery name.
+ * NamedQueries são mais utilizadas quando se sabe que a consulta dificilmente
+ * sofrerá alterações, ou seja, queries mais estáticas.*/
+@NamedQueries({
+        @NamedQuery(name = "Car.findAll", query = "select c from Car c"),
+        @NamedQuery(name = "Car.findByPlate", query = "select c from Car c where c.plate = :plate")
+})
 public class Car implements Serializable {
 
     @Id
