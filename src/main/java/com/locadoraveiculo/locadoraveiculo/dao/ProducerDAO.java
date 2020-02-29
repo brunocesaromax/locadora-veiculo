@@ -14,6 +14,7 @@ import java.util.Optional;
 @Repository
 public class ProducerDAO {
 
+    /*No CDI usaria o @Inject*/
     @PersistenceContext
     private final EntityManager em;
 

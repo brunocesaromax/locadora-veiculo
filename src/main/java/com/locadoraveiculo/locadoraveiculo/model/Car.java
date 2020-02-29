@@ -10,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,6 +54,21 @@ public class Car implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "car") // Foi mapeado na classe Aluguel no atributo 'car'
     private List<Rent> rents;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
+
+    /*Metódos de callback*/
+    @PrePersist
+    @PreUpdate
+    public void configureDatesToCreateOrUpdate() {
+        this.lastModifiedDate = new Date();
+        if (this.createDate == null)
+            this.createDate = new Date();
+    }
 
     @Override
     public boolean equals(Object o) {
