@@ -1,5 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.service;
 
+import com.locadoraveiculo.locadoraveiculo.model.CarModel;
 import com.locadoraveiculo.locadoraveiculo.model.Rent;
 
 import java.util.Date;
@@ -14,5 +15,7 @@ public interface RentService {
 
     Rent update(Long rentId, Rent rent);
 
-  Long findAllByReturnDateInterval(Date start, Date end);
+    Long findAllByReturnDateInterval(Date start, Date end);
+
+    List<Rent> findByDeliveryDateAndCarModel(Date deliveryDate, CarModel carModel);
 }

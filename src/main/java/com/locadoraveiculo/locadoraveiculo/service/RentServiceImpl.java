@@ -2,6 +2,7 @@ package com.locadoraveiculo.locadoraveiculo.service;
 
 import com.locadoraveiculo.locadoraveiculo.dao.RentDAO;
 import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
+import com.locadoraveiculo.locadoraveiculo.model.CarModel;
 import com.locadoraveiculo.locadoraveiculo.model.Rent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -48,5 +49,10 @@ public class RentServiceImpl implements RentService{
     @Override
     public Long findAllByReturnDateInterval(Date start, Date end) {
         return rentDAO.findAllByReturnDateInterval(start, end);
+    }
+
+    @Override
+    public List<Rent> findByDeliveryDateAndCarModel(Date deliveryDate, CarModel carModel) {
+        return rentDAO.findByDeliveryDateAndCarModel(deliveryDate, carModel);
     }
 }

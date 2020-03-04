@@ -1,5 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.controller;
 
+import com.locadoraveiculo.locadoraveiculo.model.CarModel;
 import com.locadoraveiculo.locadoraveiculo.model.Rent;
 import com.locadoraveiculo.locadoraveiculo.service.RentService;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,12 @@ public class RentController {
     public ResponseEntity<Long> findTotalByInterval(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date start,
                                                     @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date end) {
         return ResponseEntity.status(HttpStatus.OK).body(rentService.findAllByReturnDateInterval(start, end));
+    }
+
+    @GetMapping("filter")
+    public ResponseEntity<List<Rent>> findByDeliveryDateAndCarModel(@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date deliveryDate,
+                                                                    CarModel carModel) {
+        return ResponseEntity.status(HttpStatus.OK).body(rentService.findByDeliveryDateAndCarModel(deliveryDate, carModel));
     }
 
     @DeleteMapping("/{id}")
