@@ -17,71 +17,84 @@ import java.util.List;
 @Repository
 public class CarDAO {
 
-    @PersistenceContext
-    private final EntityManager em;
+  @PersistenceContext
+  private final EntityManager em;
 
-    @Transactional
-    public Car save(Car car) {
-        em.merge(car);
-        return car;
-    }
+  @Transactional
+  public Car save(Car car) {
+    em.merge(car);
+    return car;
+  }
 
-    public List<Car> findAll() {
+  public List<Car> findAll() {
 //        return em.createQuery("select c from Car c", Car.class).getResultList();
-        return em.createNamedQuery("Car.findAll", Car.class).getResultList();
-    }
+    return em.createNamedQuery("Car.findAll", Car.class).getResultList();
+  }
 
-    @Transactional
-    public void delete(Long id) {
-        Car carTemp = em.find(Car.class, id);
+  @Transactional
+  public void delete(Long id) {
+    Car carTemp = em.find(Car.class, id);
 
-        em.remove(carTemp);
-        em.flush();
-    }
+    em.remove(carTemp);
+    em.flush();
+  }
 
-    public Car findById(Long carId) {
-        return em.find(Car.class, carId);
-    }
+  public Car findById(Long carId) {
+    return em.find(Car.class, carId);
+  }
 
-    public Car findByIdWithAccessories(Long carId) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Car> q = cb.createQuery(Car.class);
-        Root<Car> c = q.from(Car.class);
-        c.fetch(Car_.ACCESSORIES, JoinType.LEFT);
+  public Car findByIdWithAccessories(Long carId) {
+    CriteriaBuilder cb = em.getCriteriaBuilder();
+    CriteriaQuery<Car> q = cb.createQuery(Car.class);
+    Root<Car> c = q.from(Car.class);
+    c.fetch(Car_.ACCESSORIES, JoinType.LEFT);
 
-        Predicate predicate = cb.equal(c.get(Car_.ID), carId);
-        q.where(predicate);
+    Predicate predicate = cb.equal(c.get(Car_.ID), carId);
+    q.where(predicate);
 
-        TypedQuery<Car> query = em.createQuery(q);
-        return query.getSingleResult();
-    }
+    TypedQuery<Car> query = em.createQuery(q);
+    return query.getSingleResult();
+  }
 
-    public List<RentCarInfo> findDataGroupByCar() {
-        List<RentCarInfo> results = em.createQuery(
-                "select NEW com.locadoraveiculo.locadoraveiculo.info.RentCarInfo (c, count(r), max(r.totalValue), avg(r.totalValue)) " +
-                        "from Car c join c.rents r " +
-                        "group by c " +
-                        "having count(r) > 1", RentCarInfo.class).getResultList();
+  public List<RentCarInfo> findDataGroupByCar() {
+    List<RentCarInfo> results = em.createQuery(
+        "select NEW com.locadoraveiculo.locadoraveiculo.info.RentCarInfo (c, count(r), max(r.totalValue), avg(r.totalValue)) " +
+            "from Car c join c.rents r " +
+            "group by c " +
+            "having count(r) > 1", RentCarInfo.class).getResultList();
 
-        return results;
-    }
+    return results;
+  }
 
-    public Car findByPlate(String plate) {
-        return em.createNamedQuery("Car.findByPlate", Car.class)
-                .setParameter("plate", plate)
-                .getSingleResult();
-    }
+  public Car findByPlate(String plate) {
+    return em.createNamedQuery("Car.findByPlate", Car.class)
+        .setParameter("plate", plate)
+        .getSingleResult();
+  }
 
-    public List<Car> findWithPagination(int first, int pageSize) {
-        return em.createNamedQuery("Car.findAll", Car.class)
-                .setFirstResult(first)
-                .setMaxResults(pageSize)
-                .getResultList();
-        /*Consulta gerada vai ser do tipo:
-        * select c from Car c limit first, pageSize*/
-    }
+  public List<Car> findWithPagination(int first, int pageSize) {
+    return em.createNamedQuery("Car.findAll", Car.class)
+        .setFirstResult(first)
+        .setMaxResults(pageSize)
+        .getResultList();
+    /*Consulta gerada vai ser do tipo:
+     * select c from Car c limit first, pageSize*/
+  }
 
-    public Long findTotalCars() {
-        return em.createQuery("select count(c) from Car c", Long.class).getSingleResult();
-    }
+  public Long findTotalCars() {
+    return em.createQuery("select count(c) from Car c", Long.class).getSingleResult();
+  }
+
+  public List<String> findAllPlates() {
+    CriteriaBuilder builder = em.getCriteriaBuilder();
+    CriteriaQuery<String> criteriaQuery = builder.createQuery(String.class);
+    Root<Car> carRoot = criteriaQuery.from(Car.class);
+
+    criteriaQuery.select(carRoot.get(Car_.PLATE));
+
+    TypedQuery<String> query = em.createQuery(criteriaQuery);
+
+    return query.getResultList();
+  }
+
 }

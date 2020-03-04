@@ -23,4 +23,6 @@ public interface CarService {
     Car findByPlate(String plate);
 
     List<Car> pagination(int first, int pageSize);
+
+    List<String> findAllPlates();
 }

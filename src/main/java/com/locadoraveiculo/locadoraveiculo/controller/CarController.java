@@ -45,6 +45,11 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findByPlate(plate));
     }
 
+    @GetMapping("plates")
+    public ResponseEntity<List<String>> findAllPlates() {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.findAllPlates());
+    }
+
     @GetMapping(params = "pagination")
     public ResponseEntity<List<Car>> pagination(@RequestParam int first,
                                                 @RequestParam int pageSize) {
