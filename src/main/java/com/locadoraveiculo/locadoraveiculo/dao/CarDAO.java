@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import javax.persistence.criteria.*;
+import javax.persistence.metamodel.SingularAttribute;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -135,6 +136,20 @@ public class CarDAO {
         carRoot.get(Car_.DAILY_VALUE)));
 
     TypedQuery<CarInfo> query = em.createQuery(criteriaQuery);
+
+    return query.getResultList();
+  }
+
+  public List<Car> findAllByColor(String color) {
+    CriteriaBuilder builder = em.getCriteriaBuilder();
+    CriteriaQuery<Car> criteriaQuery = builder.createQuery(Car.class);
+    Root<Car> carRoot = criteriaQuery.from(Car.class);
+    Predicate predicate = builder.equal(builder.upper(carRoot.get(Car_.COLOR)), color.toUpperCase());
+
+    criteriaQuery.select(carRoot);
+    criteriaQuery.where(predicate);
+
+    TypedQuery<Car> query = em.createQuery(criteriaQuery);
 
     return query.getResultList();
   }

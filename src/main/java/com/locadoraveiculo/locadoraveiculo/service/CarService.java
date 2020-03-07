@@ -33,4 +33,6 @@ public interface CarService {
     List<ObjectNode> complexResultTuple();
 
     List<CarInfo> complexResultConstructor();
+
+    List<Car> findAllByColor(String color);
 }

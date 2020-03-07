@@ -94,4 +94,9 @@ public class CarServiceImpl implements CarService {
     public List<CarInfo> complexResultConstructor() {
         return carDAO.complexResultConstructor();
     }
+
+  @Override
+  public List<Car> findAllByColor(String color) {
+    return carDAO.findAllByColor(color);
+  }
 }
