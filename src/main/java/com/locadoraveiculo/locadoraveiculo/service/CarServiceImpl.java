@@ -99,4 +99,9 @@ public class CarServiceImpl implements CarService {
   public List<Car> findAllByColor(String color) {
     return carDAO.findAllByColor(color);
   }
+
+  @Override
+  public List<Car> findAllOrderedByDailyValue() {
+    return carDAO.findAllOrderedByDailyValue();
+  }
 }

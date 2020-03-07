@@ -154,6 +154,21 @@ public class CarDAO {
     return query.getResultList();
   }
 
+  public List<Car> findAllOrderedByDailyValue() {
+    CriteriaBuilder builder = em.getCriteriaBuilder();
+    CriteriaQuery<Car> criteriaQuery = builder.createQuery(Car.class);
+
+    Root<Car> carRoot = criteriaQuery.from(Car.class);
+    Order order = builder.desc(carRoot.get(Car_.DAILY_VALUE));
+
+    criteriaQuery.select(carRoot);
+    criteriaQuery.orderBy(order);
+
+    TypedQuery<Car> query = em.createQuery(criteriaQuery);
+
+    return query.getResultList();
+  }
+
   private List<ObjectNode> _toJson(List<Tuple> results) {
     List<ObjectNode> json = new ArrayList<>();
 

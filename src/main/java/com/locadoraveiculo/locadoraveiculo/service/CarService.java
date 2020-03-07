@@ -35,4 +35,6 @@ public interface CarService {
     List<CarInfo> complexResultConstructor();
 
     List<Car> findAllByColor(String color);
+
+    List<Car> findAllOrderedByDailyValue();
 }

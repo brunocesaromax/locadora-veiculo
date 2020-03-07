@@ -79,6 +79,11 @@ public class CarController {
     return ResponseEntity.status(HttpStatus.OK).body(carService.findAllByColor(color));
   }
 
+  @GetMapping(params = "orderly-by-daily-value")
+  public ResponseEntity<List<Car>> findAllOrderedByDailyValue() {
+    return ResponseEntity.status(HttpStatus.OK).body(carService.findAllOrderedByDailyValue());
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity delete(@PathVariable Long id) {
     carService.delete(id);
