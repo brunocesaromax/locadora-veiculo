@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,11 @@ public class RentController {
     public ResponseEntity<List<Rent>> findByDeliveryDateAndCarModel(@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date deliveryDate,
                                                                     CarModel carModel) {
         return ResponseEntity.status(HttpStatus.OK).body(rentService.findByDeliveryDateAndCarModel(deliveryDate, carModel));
+    }
+
+    @GetMapping("total-value")
+    public ResponseEntity<BigDecimal> sumTotalValue() {
+        return ResponseEntity.status(HttpStatus.OK).body(rentService.sumTotalValue());
     }
 
     @DeleteMapping("/{id}")

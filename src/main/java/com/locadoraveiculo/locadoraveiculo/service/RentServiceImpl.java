@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -55,4 +56,9 @@ public class RentServiceImpl implements RentService{
     public List<Rent> findByDeliveryDateAndCarModel(Date deliveryDate, CarModel carModel) {
         return rentDAO.findByDeliveryDateAndCarModel(deliveryDate, carModel);
     }
+
+  @Override
+  public BigDecimal sumTotalValue() {
+    return rentDAO.sumTotalValue();
+  }
 }

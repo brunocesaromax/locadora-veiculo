@@ -3,6 +3,7 @@ package com.locadoraveiculo.locadoraveiculo.service;
 import com.locadoraveiculo.locadoraveiculo.model.CarModel;
 import com.locadoraveiculo.locadoraveiculo.model.Rent;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface RentService {
     Long findAllByReturnDateInterval(Date start, Date end);
 
     List<Rent> findByDeliveryDateAndCarModel(Date deliveryDate, CarModel carModel);
+
+    BigDecimal sumTotalValue();
 }
