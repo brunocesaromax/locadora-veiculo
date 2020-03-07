@@ -1,16 +1,18 @@
 package com.locadoraveiculo.locadoraveiculo.dao;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.locadoraveiculo.locadoraveiculo.info.CarInfo;
 import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
 import com.locadoraveiculo.locadoraveiculo.model.Car_;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -95,6 +97,63 @@ public class CarDAO {
     TypedQuery<String> query = em.createQuery(criteriaQuery);
 
     return query.getResultList();
+  }
+
+  public List<Object[]> complexResult() {
+    CriteriaBuilder builder = em.getCriteriaBuilder();
+    CriteriaQuery<Object[]> criteriaQuery = builder.createQuery(Object[].class);
+    Root<Car> carRoot = criteriaQuery.from(Car.class);
+
+    criteriaQuery.multiselect(carRoot.get(Car_.PLATE), carRoot.get(Car_.dailyValue));
+
+    TypedQuery<Object[]> query = em.createQuery(criteriaQuery);
+    return query.getResultList();
+  }
+
+  public List<ObjectNode> complexResultTuple() {
+    CriteriaBuilder builder = em.getCriteriaBuilder();
+    CriteriaQuery<Tuple> criteriaQuery = builder.createTupleQuery();
+    Root<Car> carRoot = criteriaQuery.from(Car.class);
+
+    criteriaQuery.multiselect(carRoot.get(Car_.PLATE).alias("plate")
+        , carRoot.get(Car_.dailyValue).alias("dailyValue"));
+
+    TypedQuery<Tuple> query = em.createQuery(criteriaQuery);
+    List<Tuple> results = query.getResultList();
+    List<ObjectNode> jacksonJsonObject = _toJson(results);
+
+    return jacksonJsonObject;
+  }
+
+  public List<CarInfo> complexResultConstructor() {
+    CriteriaBuilder builder = em.getCriteriaBuilder();
+    CriteriaQuery<CarInfo> criteriaQuery = builder.createQuery(CarInfo.class);
+    Root<Car> carRoot = criteriaQuery.from(Car.class);
+
+    criteriaQuery.select(builder.construct(CarInfo.class,
+        carRoot.get(Car_.PLATE),
+        carRoot.get(Car_.DAILY_VALUE)));
+
+    TypedQuery<CarInfo> query = em.createQuery(criteriaQuery);
+
+    return query.getResultList();
+  }
+
+  private List<ObjectNode> _toJson(List<Tuple> results) {
+    List<ObjectNode> json = new ArrayList<>();
+
+    ObjectMapper mapper = new ObjectMapper();
+
+    for (Tuple t : results) {
+      List<TupleElement<?>> cols = t.getElements();
+      ObjectNode one = mapper.createObjectNode();
+
+      cols.forEach(col -> one.put(col.getAlias(), t.get(col.getAlias()).toString()));
+
+      json.add(one);
+    }
+
+    return json;
   }
 
 }

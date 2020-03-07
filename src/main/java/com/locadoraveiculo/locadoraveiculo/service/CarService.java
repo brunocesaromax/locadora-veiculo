@@ -1,5 +1,7 @@
 package com.locadoraveiculo.locadoraveiculo.service;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.locadoraveiculo.locadoraveiculo.info.CarInfo;
 import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
 
@@ -25,4 +27,10 @@ public interface CarService {
     List<Car> pagination(int first, int pageSize);
 
     List<String> findAllPlates();
+
+    List<Object[]> complexResult();
+
+    List<ObjectNode> complexResultTuple();
+
+    List<CarInfo> complexResultConstructor();
 }

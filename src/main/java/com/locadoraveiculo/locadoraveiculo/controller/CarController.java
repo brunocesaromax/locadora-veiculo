@@ -1,5 +1,7 @@
 package com.locadoraveiculo.locadoraveiculo.controller;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.locadoraveiculo.locadoraveiculo.info.CarInfo;
 import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
 import com.locadoraveiculo.locadoraveiculo.service.CarService;
@@ -54,6 +56,22 @@ public class CarController {
     public ResponseEntity<List<Car>> pagination(@RequestParam int first,
                                                 @RequestParam int pageSize) {
         return ResponseEntity.status(HttpStatus.OK).body(carService.pagination(first, pageSize));
+    }
+
+    @GetMapping("complex-result-simple")
+    public ResponseEntity<List<Object[]>> complexResult() {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.complexResult());
+    }
+
+    @GetMapping("complex-result-tuple")
+    public ResponseEntity<List<ObjectNode>> complexResultTuple() {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.complexResultTuple());
+    }
+
+    /*Melhor forma a se fazer projeções já que já é orientada a objeto*/
+    @GetMapping("complex-result-constructor")
+    public ResponseEntity<List<CarInfo>> complexResultConstructor() {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.complexResultConstructor());
     }
 
     @DeleteMapping("/{id}")

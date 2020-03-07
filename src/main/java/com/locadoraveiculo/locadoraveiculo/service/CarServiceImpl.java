@@ -1,7 +1,9 @@
 package com.locadoraveiculo.locadoraveiculo.service;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.locadoraveiculo.locadoraveiculo.dao.CarDAO;
 import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
+import com.locadoraveiculo.locadoraveiculo.info.CarInfo;
 import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
 import lombok.RequiredArgsConstructor;
@@ -77,4 +79,19 @@ public class CarServiceImpl implements CarService {
   public List<String> findAllPlates() {
     return carDAO.findAllPlates();
   }
+
+  @Override
+  public List<Object[]> complexResult() {
+    return carDAO.complexResult();
+  }
+
+    @Override
+    public List<ObjectNode> complexResultTuple() {
+        return carDAO.complexResultTuple();
+    }
+
+    @Override
+    public List<CarInfo> complexResultConstructor() {
+        return carDAO.complexResultConstructor();
+    }
 }
