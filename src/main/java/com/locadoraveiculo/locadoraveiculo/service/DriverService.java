@@ -1,5 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.service;
 
+import com.locadoraveiculo.locadoraveiculo.info.DriverInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Driver;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface DriverService {
     void delete(Long id);
 
     Driver update(Long driverId, Driver driver);
+
+    List<DriverInfo> findTopFive();
 }

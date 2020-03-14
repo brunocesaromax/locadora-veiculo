@@ -2,6 +2,7 @@ package com.locadoraveiculo.locadoraveiculo.service;
 
 import com.locadoraveiculo.locadoraveiculo.dao.DriverDAO;
 import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
+import com.locadoraveiculo.locadoraveiculo.info.DriverInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Driver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -44,5 +45,10 @@ public class DriverServiceImpl implements DriverService{
             BeanUtils.copyProperties(driver, driverOld, "id");
             return driverDAO.save(driverOld);
         }
+    }
+
+    @Override
+    public List<DriverInfo> findTopFive() {
+        return driverDAO.findTopFive();
     }
 }

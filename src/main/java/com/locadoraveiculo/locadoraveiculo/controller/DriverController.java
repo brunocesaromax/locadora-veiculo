@@ -1,5 +1,6 @@
 package com.locadoraveiculo.locadoraveiculo.controller;
 
+import com.locadoraveiculo.locadoraveiculo.info.DriverInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Driver;
 import com.locadoraveiculo.locadoraveiculo.service.DriverService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,11 @@ public class DriverController {
     @GetMapping
     public ResponseEntity<List<Driver>> findAll(){
         return ResponseEntity.status(HttpStatus.OK).body(driverService.findAll());
+    }
+
+    @GetMapping(value = "top-five")
+    public ResponseEntity<List<DriverInfo>> findTopFive(){
+        return ResponseEntity.status(HttpStatus.OK).body(driverService.findTopFive());
     }
 
     @DeleteMapping("/{id}")
