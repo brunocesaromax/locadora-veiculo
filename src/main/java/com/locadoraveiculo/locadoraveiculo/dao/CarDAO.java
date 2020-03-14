@@ -178,6 +178,38 @@ public class CarDAO {
         return query.getResultList();
     }
 
+    public Double findDailyValueCarsAVG() {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Double> criteriaQuery = builder.createQuery(Double.class);
+
+        Root<Car> carRoot = criteriaQuery.from(Car.class);
+        criteriaQuery.select(builder.avg(carRoot.get(Car_.DAILY_VALUE)));
+
+        TypedQuery<Double> query = em.createQuery(criteriaQuery);
+        Double avgResult = query.getSingleResult();
+
+        return avgResult;
+    }
+
+    public List<Car> findAllWithDailyValueGreaterOrEqualAverage() {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Car> criteriaQuery = builder.createQuery(Car.class);
+        Subquery<Double> subQuery = criteriaQuery.subquery(Double.class);
+
+        Root<Car> carRoot = criteriaQuery.from(Car.class);
+        Root<Car> subRoot = subQuery.from(Car.class);
+
+        subQuery.select(builder.avg(subRoot.get(Car_.DAILY_VALUE)));
+
+        criteriaQuery.select(carRoot);
+        criteriaQuery.where(builder.greaterThanOrEqualTo(carRoot.get(Car_.DAILY_VALUE), subQuery));
+
+        TypedQuery<Car> query = em.createQuery(criteriaQuery);
+        List<Car> cars = query.getResultList();
+
+        return cars;
+    }
+
     private List<ObjectNode> _toJson(List<Tuple> results) {
         List<ObjectNode> json = new ArrayList<>();
 

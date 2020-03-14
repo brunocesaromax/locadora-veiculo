@@ -84,6 +84,16 @@ public class CarController {
     return ResponseEntity.status(HttpStatus.OK).body(carService.findAllOrderedByDailyValue());
   }
 
+  @GetMapping(value = "find-daily-value-cars-avg")
+  public ResponseEntity<Double> findDailyValueCarsAVG() {
+    return ResponseEntity.status(HttpStatus.OK).body(carService.findDailyValueCarsAVG());
+  }
+
+  @GetMapping(value = "find-cars-with-daily-value-greater-avg")
+  public ResponseEntity<List<Car>> findAllWithDailyValueGreaterOrEqualAverage() {
+    return ResponseEntity.status(HttpStatus.OK).body(carService.findAllWithDailyValueGreaterOrEqualAverage());
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity delete(@PathVariable Long id) {
     carService.delete(id);

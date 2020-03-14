@@ -104,4 +104,14 @@ public class CarServiceImpl implements CarService {
   public List<Car> findAllOrderedByDailyValue() {
     return carDAO.findAllOrderedByDailyValue();
   }
+
+    @Override
+    public Double findDailyValueCarsAVG() {
+        return carDAO.findDailyValueCarsAVG();
+    }
+
+    @Override
+    public List<Car> findAllWithDailyValueGreaterOrEqualAverage() {
+        return carDAO.findAllWithDailyValueGreaterOrEqualAverage();
+    }
 }

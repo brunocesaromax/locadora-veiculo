@@ -37,4 +37,8 @@ public interface CarService {
     List<Car> findAllByColor(String color);
 
     List<Car> findAllOrderedByDailyValue();
+
+    Double findDailyValueCarsAVG();
+
+    List<Car> findAllWithDailyValueGreaterOrEqualAverage();
 }
