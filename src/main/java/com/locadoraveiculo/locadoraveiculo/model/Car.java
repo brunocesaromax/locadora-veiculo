@@ -22,7 +22,8 @@ import java.util.Objects;
  * NamedQueries são mais utilizadas quando se sabe que a consulta dificilmente
  * sofrerá alterações, ou seja, queries mais estáticas.*/
 @NamedQueries({
-        @NamedQuery(name = "Car.findAll", query = "select c from Car c"),
+        // Melhorando a consulta com inner join fetch para ser feito em apenas uma chamada no banco
+        @NamedQuery(name = "Car.findAll", query = "select c from Car c inner join fetch c.carModel"),
         @NamedQuery(name = "Car.findByPlate", query = "select c from Car c where c.plate = :plate")
 })
 public class Car implements Serializable {

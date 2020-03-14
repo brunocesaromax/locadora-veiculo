@@ -17,7 +17,7 @@ public class CarModel {
 
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="producer_id")
     private Producer producer;
 
