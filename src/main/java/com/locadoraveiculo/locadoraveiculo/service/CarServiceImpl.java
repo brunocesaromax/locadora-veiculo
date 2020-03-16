@@ -114,4 +114,10 @@ public class CarServiceImpl implements CarService {
     public List<Car> findAllWithDailyValueGreaterOrEqualAverage() {
         return carDAO.findAllWithDailyValueGreaterOrEqualAverage();
     }
+
+    @Transactional
+    @Override
+    public Car removeFirstRentOfCar(Long carId) {
+        return carDAO.removeFirstRentOfCar(carId);
+    }
 }

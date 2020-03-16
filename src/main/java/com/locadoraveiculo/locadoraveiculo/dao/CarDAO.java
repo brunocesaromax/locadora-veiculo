@@ -56,6 +56,15 @@ public class CarDAO {
         return em.find(Car.class, carId);
     }
 
+    public Car removeFirstRentOfCar(Long carId) {
+        Car car = em.find(Car.class, carId);
+        // A partir de agora o primeiro aluguel removido ficará orfão e também será removido do BD
+        // Desde que o objeto pai esteja anota com o Cascade Persist e orphanRemoval = true
+        car.getRents().remove(0);
+        em.persist(car);
+        return car;
+    }
+
     public Car findByIdWithAccessories(Long carId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Car> q = cb.createQuery(Car.class);

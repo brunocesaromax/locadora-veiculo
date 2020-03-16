@@ -41,4 +41,6 @@ public interface CarService {
     Double findDailyValueCarsAVG();
 
     List<Car> findAllWithDailyValueGreaterOrEqualAverage();
+
+    Car removeFirstRentOfCar(Long carId);
 }

@@ -104,4 +104,9 @@ public class CarController {
   public ResponseEntity<Car> update(@PathVariable Long id, @Valid @RequestBody Car car) {
     return ResponseEntity.status(HttpStatus.OK).body(carService.update(id, car));
   }
+
+  @PutMapping("/{id}/remove-first-rent")
+  public ResponseEntity<Car> update(@PathVariable Long id) {
+    return ResponseEntity.status(HttpStatus.OK).body(carService.removeFirstRentOfCar(id));
+  }
 }
