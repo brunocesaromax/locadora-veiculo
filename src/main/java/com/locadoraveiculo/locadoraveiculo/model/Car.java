@@ -50,7 +50,7 @@ public class Car implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private CarModel carModel;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Accessory> accessories;
 
     @JsonManagedReference

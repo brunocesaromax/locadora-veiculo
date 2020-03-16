@@ -25,7 +25,8 @@ public class CarDAO {
 
     @Transactional
     public Car save(Car car) {
-        em.merge(car);
+        /*Só retorna os dados corretamente com persist, todo:Estudar novamente o que acontece com o merge*/
+        em.persist(car);
         return car;
     }
 
