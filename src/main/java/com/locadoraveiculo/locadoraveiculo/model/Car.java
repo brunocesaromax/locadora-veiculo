@@ -54,7 +54,7 @@ public class Car implements Serializable {
     private List<Accessory> accessories;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "car") // Foi mapeado na classe Aluguel no atributo 'car'
+    @OneToMany(mappedBy = "car", cascade = CascadeType.REMOVE) // Foi mapeado na classe Aluguel no atributo 'car'
     private List<Rent> rents;
 
     @Temporal(TemporalType.TIMESTAMP)
