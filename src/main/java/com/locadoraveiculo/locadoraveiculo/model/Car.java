@@ -46,7 +46,8 @@ public class Car implements Serializable {
     private BigDecimal dailyValue;
 
     @NotNull
-    @ManyToOne
+    /*Persistir modelo de carro ao salvar um novo carro*/
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private CarModel carModel;
 
     @ManyToMany
