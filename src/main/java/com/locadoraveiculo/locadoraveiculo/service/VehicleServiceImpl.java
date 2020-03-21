@@ -23,4 +23,9 @@ public class VehicleServiceImpl implements VehicleService{
     public Vehicle findById(VehicleId id) {
         return vehicleDAO.findById(id);
     }
+
+    @Override
+    public String findDecriptionById(VehicleId vehicleId) {
+        return vehicleDAO.findDecriptionById(vehicleId);
+    }
 }

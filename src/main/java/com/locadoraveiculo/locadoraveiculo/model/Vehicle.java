@@ -4,10 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Embedded;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tab_vehicle")
@@ -24,7 +21,13 @@ public class Vehicle {
     private String model;
 
     /*Deixa o projeto mais bem orientado a objeto,
-    * além de melhorar a performace evitando joins*/
+     * além de melhorar a performace evitando joins*/
     @Embedded
     private Owner owner;
+
+    @Transient // Necessário quando criar um metódo ou atributo não persistível no BD
+    public String getDescription() {
+        return "Placa: " + getId().getPlate() + ". Fabricante: " +
+                getProducer() + ". Modelo: " + getModel();
+    }
 }

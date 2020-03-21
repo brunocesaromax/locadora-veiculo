@@ -7,4 +7,6 @@ public interface VehicleService {
     Vehicle save(Vehicle vehicle);
 
     Vehicle findById(VehicleId id);
+
+    String findDecriptionById(VehicleId vehicleId);
 }

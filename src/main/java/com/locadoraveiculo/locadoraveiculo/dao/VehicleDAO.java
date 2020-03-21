@@ -23,4 +23,9 @@ public class VehicleDAO {
     public Vehicle findById(VehicleId id) {
         return em.find(Vehicle.class, id);
     }
+
+    public String findDecriptionById(VehicleId id) {
+         Vehicle vehicle = em.find(Vehicle.class, id);
+         return vehicle.getDescription();
+    }
 }

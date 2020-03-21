@@ -29,4 +29,9 @@ public class VehicleController {
         return ResponseEntity.status(HttpStatus.OK).body(vehicleService.findById(vehicleId));
     }
 
+    @GetMapping(params = "description")
+    public ResponseEntity<String> findDecriptionById(VehicleId vehicleId){
+        return ResponseEntity.status(HttpStatus.OK).body(vehicleService.findDecriptionById(vehicleId));
+    }
+
 }
