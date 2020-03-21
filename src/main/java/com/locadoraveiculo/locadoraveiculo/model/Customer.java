@@ -2,6 +2,8 @@ package com.locadoraveiculo.locadoraveiculo.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,4 +25,13 @@ public class Customer {
             joinColumns = @JoinColumn(name = "customer_id"))
     @Column(name = "phone_number")
     private List<String> phones = new ArrayList<>();
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @CollectionTable(name = "customer_addresses",
+            joinColumns = @JoinColumn(name = "customer_id"))
+    @AttributeOverrides({
+            @AttributeOverride(name = "street", column = @Column(name = "address_street"))
+    })
+    private List<Address> addresses;
 }
