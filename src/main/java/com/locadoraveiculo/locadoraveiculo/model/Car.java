@@ -65,6 +65,10 @@ public class Car implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModifiedDate;
 
+    @Lob
+    @Column(name = "car_image")
+    private byte[] image;
+
     /*Metódos de callback*/
     @PrePersist
     @PreUpdate

@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.locadoraveiculo.locadoraveiculo.info.CarInfo;
 import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface CarService {
@@ -43,4 +45,6 @@ public interface CarService {
     List<Car> findAllWithDailyValueGreaterOrEqualAverage();
 
     Car removeFirstRentOfCar(Long carId);
+
+    void uploadImage(Long id, MultipartFile file) throws IOException;
 }
