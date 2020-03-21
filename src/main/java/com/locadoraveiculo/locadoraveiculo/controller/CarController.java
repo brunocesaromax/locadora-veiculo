@@ -7,6 +7,7 @@ import com.locadoraveiculo.locadoraveiculo.model.Car;
 import com.locadoraveiculo.locadoraveiculo.service.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,15 @@ public class CarController {
     public ResponseEntity<List<Car>> uploadFile(@PathVariable Long id, @RequestParam("file") MultipartFile file) throws IOException {
         carService.uploadImage(id, file);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    /*Para retornar imagem em dados brutos usar:
+    * produces = MediaType.APPLICATION_OCTET_STREAM_VALUE*/
+    @GetMapping(value = "/{id}/image-car",
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getImageWithMediaType(@PathVariable Long id) {
+        Car car = carService.findById(id);
+        return car.getImage();
     }
 
     @GetMapping
