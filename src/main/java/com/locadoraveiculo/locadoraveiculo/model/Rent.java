@@ -44,6 +44,10 @@ public class Rent {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
     @Temporal(TemporalType.TIMESTAMP)
+    // Algumas empresas utilizam o nome da empresa antes dos nomes das colunas
+    // nullable = false, coluna não pode ser nula no BD
+    // unique, insertable , updatable outras propriedades
+    @Column(nullable = false)
     private Date deliveryDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", locale = "pt-BR", timezone = "Brazil/East")
