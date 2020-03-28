@@ -77,15 +77,15 @@ public class CarServiceImpl implements CarService {
         return carDAO.findWithPagination(first, pageSize);
     }
 
-  @Override
-  public List<String> findAllPlates() {
-    return carDAO.findAllPlates();
-  }
+    @Override
+    public List<String> findAllPlates() {
+        return carDAO.findAllPlates();
+    }
 
-  @Override
-  public List<Object[]> complexResult() {
-    return carDAO.complexResult();
-  }
+    @Override
+    public List<Object[]> complexResult() {
+        return carDAO.complexResult();
+    }
 
     @Override
     public List<ObjectNode> complexResultTuple() {
@@ -97,15 +97,15 @@ public class CarServiceImpl implements CarService {
         return carDAO.complexResultConstructor();
     }
 
-  @Override
-  public List<Car> findAllByColor(String color) {
-    return carDAO.findAllByColor(color);
-  }
+    @Override
+    public List<Car> findAllByColor(String color) {
+        return carDAO.findAllByColor(color);
+    }
 
-  @Override
-  public List<Car> findAllOrderedByDailyValue() {
-    return carDAO.findAllOrderedByDailyValue();
-  }
+    @Override
+    public List<Car> findAllOrderedByDailyValue() {
+        return carDAO.findAllOrderedByDailyValue();
+    }
 
     @Override
     public Double findDailyValueCarsAVG() {

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "insurance_policy")
+@Table(name = "insurance_policy", schema = "locadoraveiculos")
 @Setter
 @Getter
 public class InsurancePolicy {
