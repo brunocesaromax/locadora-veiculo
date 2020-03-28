@@ -39,7 +39,15 @@ public class CarDAO {
 
         criteriaQuery.select(carRoot);
         TypedQuery<Car> query = em.createQuery(criteriaQuery);
-        return query.getResultList();
+        List<Car> cars = query.getResultList();
+
+        /*Ao buscar carro de id = 12, não é feita outra consulta, pois está sendo
+        * utilizado o cache de primeiro nível, lista já buscada, portanto pegará o
+        * carro de id = 12 dessa lista.*/
+        Car car = em.find(Car.class, 12L);
+        System.out.println(car.getId());
+
+        return cars;
 //        return em.createQuery("select c from Car c", Car.class).getResultList();
 //        return em.createNamedQuery("Car.findAll", Car.class).getResultList();
     }
