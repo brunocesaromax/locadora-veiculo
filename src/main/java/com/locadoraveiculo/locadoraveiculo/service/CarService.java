@@ -47,4 +47,6 @@ public interface CarService {
     Car removeFirstRentOfCar(Long carId);
 
     void uploadImage(Long id, MultipartFile file) throws IOException;
+
+    List<Car> findAllWithNativeQuery();
 }

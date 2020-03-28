@@ -52,6 +52,12 @@ public class CarDAO {
 //        return em.createNamedQuery("Car.findAll", Car.class).getResultList();
     }
 
+    /*Consulta apenas para aprendizado, porém sempre dar preferência para JPQL ou criteriaQuery*/
+    public List<Car> findAllWithNativeQuery() {
+       Query query = em.createNativeQuery(" select * from car", Car.class);
+        return query.getResultList();
+    }
+
     @Transactional
     public void delete(Long id) {
         Car carTemp = em.find(Car.class, id);

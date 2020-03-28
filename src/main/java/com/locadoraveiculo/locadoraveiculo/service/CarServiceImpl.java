@@ -129,4 +129,9 @@ public class CarServiceImpl implements CarService {
         car.setImage(file.getBytes());
         carDAO.save(car);
     }
+
+    @Override
+    public List<Car> findAllWithNativeQuery() {
+        return carDAO.findAllWithNativeQuery();
+    }
 }

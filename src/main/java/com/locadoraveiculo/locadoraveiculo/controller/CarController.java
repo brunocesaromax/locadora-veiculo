@@ -50,6 +50,11 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findAll());
     }
 
+    @GetMapping(params = "nativeQuery")
+    public ResponseEntity<List<Car>> findAllWithNativeQuery() {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.findAllWithNativeQuery());
+    }
+
     @GetMapping(params = "groupByCar")
     public ResponseEntity<List<RentCarInfo>> findDataGroupByCar() {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findDataGroupByCar());
