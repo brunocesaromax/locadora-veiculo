@@ -18,7 +18,9 @@ public interface RentService {
 
     Long findAllByReturnDateInterval(Date start, Date end);
 
+    BigDecimal sumTotalValue();
+
     List<Rent> findByDeliveryDateAndCarModel(Date deliveryDate, CarModel carModel);
 
-    BigDecimal sumTotalValue();
+    List<Rent> findByDeliveryDateAndCarModelCriteria(Date deliveryDate, CarModel carModel);
 }

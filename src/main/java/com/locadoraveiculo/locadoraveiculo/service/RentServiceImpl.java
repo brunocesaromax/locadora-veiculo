@@ -57,7 +57,12 @@ public class RentServiceImpl implements RentService{
         return rentDAO.findByDeliveryDateAndCarModel(deliveryDate, carModel);
     }
 
-  @Override
+    @Override
+    public List<Rent> findByDeliveryDateAndCarModelCriteria(Date deliveryDate, CarModel carModel) {
+        return rentDAO.findByDeliveryDateAndCarModelCriteria(deliveryDate, carModel);
+    }
+
+    @Override
   public BigDecimal sumTotalValue() {
     return rentDAO.sumTotalValue();
   }

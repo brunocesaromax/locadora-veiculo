@@ -45,6 +45,12 @@ public class RentController {
         return ResponseEntity.status(HttpStatus.OK).body(rentService.findByDeliveryDateAndCarModel(deliveryDate, carModel));
     }
 
+    @GetMapping("filter-hibernate")
+    public ResponseEntity<List<Rent>> findByDeliveryDateAndCarModelCriteria(@RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date deliveryDate,
+                                                                    CarModel carModel) {
+        return ResponseEntity.status(HttpStatus.OK).body(rentService.findByDeliveryDateAndCarModelCriteria(deliveryDate, carModel));
+    }
+
     @GetMapping("total-value")
     public ResponseEntity<BigDecimal> sumTotalValue() {
         return ResponseEntity.status(HttpStatus.OK).body(rentService.sumTotalValue());
