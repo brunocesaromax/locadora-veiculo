@@ -3,6 +3,7 @@ package com.locadoraveiculo.locadoraveiculo.service;
 import com.locadoraveiculo.locadoraveiculo.dao.RentDAO;
 import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
 import com.locadoraveiculo.locadoraveiculo.model.CarModel;
+import com.locadoraveiculo.locadoraveiculo.model.Month;
 import com.locadoraveiculo.locadoraveiculo.model.Rent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RentServiceImpl implements RentService{
+public class RentServiceImpl implements RentService {
 
     private final RentDAO rentDAO;
 
@@ -39,9 +40,9 @@ public class RentServiceImpl implements RentService{
     public Rent update(Long rentId, Rent rent) {
         Rent rentOld = rentDAO.findById(rentId);
 
-        if (rentOld == null){
+        if (rentOld == null) {
             throw new NotFoundException();
-        }else{
+        } else {
             BeanUtils.copyProperties(rent, rentOld, "id");
             return rentDAO.save(rentOld);
         }
@@ -63,7 +64,12 @@ public class RentServiceImpl implements RentService{
     }
 
     @Override
-  public BigDecimal sumTotalValue() {
-    return rentDAO.sumTotalValue();
-  }
+    public BigDecimal totalRentValueOfMonth(Month month) {
+        return rentDAO.totalRentValueOfMonth(month);
+    }
+
+    @Override
+    public BigDecimal sumTotalValue() {
+        return rentDAO.sumTotalValue();
+    }
 }

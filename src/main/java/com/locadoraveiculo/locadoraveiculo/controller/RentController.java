@@ -1,6 +1,7 @@
 package com.locadoraveiculo.locadoraveiculo.controller;
 
 import com.locadoraveiculo.locadoraveiculo.model.CarModel;
+import com.locadoraveiculo.locadoraveiculo.model.Month;
 import com.locadoraveiculo.locadoraveiculo.model.Rent;
 import com.locadoraveiculo.locadoraveiculo.service.RentService;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +55,11 @@ public class RentController {
     @GetMapping("total-value")
     public ResponseEntity<BigDecimal> sumTotalValue() {
         return ResponseEntity.status(HttpStatus.OK).body(rentService.sumTotalValue());
+    }
+
+    @GetMapping("/month/total-value")
+    public ResponseEntity<BigDecimal> totalRentValueOfMonth(@RequestParam Month month) {
+        return ResponseEntity.status(HttpStatus.OK).body(rentService.totalRentValueOfMonth(month));
     }
 
     @DeleteMapping("/{id}")

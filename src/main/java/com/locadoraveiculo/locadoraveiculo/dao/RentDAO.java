@@ -1,13 +1,12 @@
 package com.locadoraveiculo.locadoraveiculo.dao;
 
-import com.locadoraveiculo.locadoraveiculo.model.CarModel;
-import com.locadoraveiculo.locadoraveiculo.model.Car_;
-import com.locadoraveiculo.locadoraveiculo.model.Rent;
-import com.locadoraveiculo.locadoraveiculo.model.Rent_;
+import com.locadoraveiculo.locadoraveiculo.model.*;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -122,11 +121,23 @@ public class RentDAO {
         }
 
         if (carModel != null && carModel.getId() != null) {
-          criteria.createAlias("car", "c");
-          criteria.add(Restrictions.eq("c.carModel", carModel));
+            criteria.createAlias("car", "c");
+            criteria.add(Restrictions.eq("c.carModel", carModel));
         }
 
         return criteria.list();
+    }
+
+    public BigDecimal totalRentValueOfMonth(Month month) {
+        Session session = this.em.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(Rent.class);
+
+        criteria.setProjection(Projections.sum(Rent_.TOTAL_VALUE));
+
+        // Adicionando função month que é implementada pela maioria dos bancos de dados
+        criteria.add(Restrictions.sqlRestriction("month(request_date) = ?", month.getValue(), StandardBasicTypes.INTEGER));
+
+        return (BigDecimal) criteria.uniqueResult();
     }
 
     private Date getStartDeliveryDate(Date deliveryDate) {
