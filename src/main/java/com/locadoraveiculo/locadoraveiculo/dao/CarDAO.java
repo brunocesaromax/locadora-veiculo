@@ -7,6 +7,7 @@ import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
 import com.locadoraveiculo.locadoraveiculo.model.*;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;
@@ -242,6 +243,9 @@ public class CarDAO {
     public List<Car> findAllCarNeverRented() {
         Session session = em.unwrap(Session.class);
         Criteria criteria = session.createCriteria(Car.class);
+
+        //Para trazer acessórios dos carro e necessário dar o fetch na coleção desejada
+        criteria.setFetchMode(Car_.ACCESSORIES, FetchMode.JOIN);
 
         DetachedCriteria criteriaRent = DetachedCriteria.forClass(Rent.class);
         criteriaRent.setProjection(Projections.property(Rent_.CAR));
