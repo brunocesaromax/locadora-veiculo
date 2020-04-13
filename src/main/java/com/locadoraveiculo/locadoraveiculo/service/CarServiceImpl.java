@@ -134,4 +134,9 @@ public class CarServiceImpl implements CarService {
     public List<Car> findAllWithNativeQuery() {
         return carDAO.findAllWithNativeQuery();
     }
+
+    @Override
+    public List<Car> findAllCarNeverRented() {
+        return carDAO.findAllCarNeverRented();
+    }
 }

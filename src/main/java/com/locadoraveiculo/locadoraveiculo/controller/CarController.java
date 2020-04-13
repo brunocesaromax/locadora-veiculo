@@ -117,6 +117,11 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findAllWithDailyValueGreaterOrEqualAverage());
     }
 
+    @GetMapping("/never-rented")
+    public ResponseEntity<List<Car>> findAllCarNeverRented() {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.findAllCarNeverRented());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         carService.delete(id);

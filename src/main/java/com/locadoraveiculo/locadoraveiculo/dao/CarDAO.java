@@ -4,10 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.locadoraveiculo.locadoraveiculo.info.CarInfo;
 import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
-import com.locadoraveiculo.locadoraveiculo.model.Car;
-import com.locadoraveiculo.locadoraveiculo.model.CarModel;
-import com.locadoraveiculo.locadoraveiculo.model.Car_;
+import com.locadoraveiculo.locadoraveiculo.model.*;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -42,8 +46,8 @@ public class CarDAO {
         List<Car> cars = query.getResultList();
 
         /*Ao buscar carro de id = 12, não é feita outra consulta, pois está sendo
-        * utilizado o cache de primeiro nível, lista já buscada, portanto pegará o
-        * carro de id = 12 dessa lista.*/
+         * utilizado o cache de primeiro nível, lista já buscada, portanto pegará o
+         * carro de id = 12 dessa lista.*/
         Car car = em.find(Car.class, 12L);
         System.out.println(car.getId());
 
@@ -54,7 +58,7 @@ public class CarDAO {
 
     /*Consulta apenas para aprendizado, porém sempre dar preferência para JPQL ou criteriaQuery*/
     public List<Car> findAllWithNativeQuery() {
-       Query query = em.createNativeQuery(" select * from car", Car.class);
+        Query query = em.createNativeQuery(" select * from car", Car.class);
         return query.getResultList();
     }
 
@@ -232,6 +236,19 @@ public class CarDAO {
         List<Car> cars = query.getResultList();
 
         return cars;
+    }
+
+    /*select * from car where id not in (select car_id from rent where car_id is not null)*/
+    public List<Car> findAllCarNeverRented() {
+        Session session = em.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(Car.class);
+
+        DetachedCriteria criteriaRent = DetachedCriteria.forClass(Rent.class);
+        criteriaRent.setProjection(Projections.property(Rent_.CAR));
+        criteriaRent.add(Restrictions.isNotNull(Rent_.CAR));
+
+        criteria.add(Property.forName(Car_.ID).notIn(criteriaRent));
+        return criteria.list();
     }
 
     private List<ObjectNode> _toJson(List<Tuple> results) {
