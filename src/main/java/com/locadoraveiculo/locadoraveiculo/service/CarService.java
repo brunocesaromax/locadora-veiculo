@@ -3,6 +3,7 @@ package com.locadoraveiculo.locadoraveiculo.service;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.locadoraveiculo.locadoraveiculo.info.CarInfo;
 import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
+import com.locadoraveiculo.locadoraveiculo.info.TotalRentsByCar;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,4 +52,6 @@ public interface CarService {
     List<Car> findAllWithNativeQuery();
 
     List<Car> findAllCarNeverRented();
+
+    List<TotalRentsByCar> findTotalRentsByCar();
 }

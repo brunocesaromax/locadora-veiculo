@@ -5,6 +5,7 @@ import com.locadoraveiculo.locadoraveiculo.dao.CarDAO;
 import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
 import com.locadoraveiculo.locadoraveiculo.info.CarInfo;
 import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
+import com.locadoraveiculo.locadoraveiculo.info.TotalRentsByCar;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -138,5 +139,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> findAllCarNeverRented() {
         return carDAO.findAllCarNeverRented();
+    }
+
+    @Override
+    public List<TotalRentsByCar> findTotalRentsByCar() {
+        return carDAO.findTotalRentsByCar();
     }
 }

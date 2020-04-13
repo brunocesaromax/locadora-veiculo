@@ -3,6 +3,7 @@ package com.locadoraveiculo.locadoraveiculo.controller;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.locadoraveiculo.locadoraveiculo.info.CarInfo;
 import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
+import com.locadoraveiculo.locadoraveiculo.info.TotalRentsByCar;
 import com.locadoraveiculo.locadoraveiculo.model.Car;
 import com.locadoraveiculo.locadoraveiculo.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -120,6 +121,11 @@ public class CarController {
     @GetMapping("/never-rented")
     public ResponseEntity<List<Car>> findAllCarNeverRented() {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findAllCarNeverRented());
+    }
+
+    @GetMapping("/total-rents-by-car")
+    public ResponseEntity<List<TotalRentsByCar>> findTotalRentsByCar() {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.findTotalRentsByCar());
     }
 
     @DeleteMapping("/{id}")

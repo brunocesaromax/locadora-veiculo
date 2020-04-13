@@ -4,18 +4,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.locadoraveiculo.locadoraveiculo.info.CarInfo;
 import com.locadoraveiculo.locadoraveiculo.info.RentCarInfo;
+import com.locadoraveiculo.locadoraveiculo.info.TotalRentsByCar;
 import com.locadoraveiculo.locadoraveiculo.model.*;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Property;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -254,6 +255,25 @@ public class CarDAO {
         criteria.add(Property.forName(Car_.ID).notIn(criteriaRent));
         return criteria.list();
     }
+
+    public List<TotalRentsByCar> findTotalRentsByCar() {
+        Session session = em.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(Car.class);
+
+        criteria.createAlias(Car_.RENTS, "r");
+
+        /*Os atributos do objeto a se transformar devem ter o mesmo nome dos alias*/
+        ProjectionList pl = Projections.projectionList()
+                .add(Projections.groupProperty(Car_.PLATE).as("plate"))
+                .add(Projections.count("r.id").as("totalRents"));
+
+        criteria.setProjection(pl);
+        criteria.addOrder(org.hibernate.criterion.Order.desc("totalRents"));
+        criteria.setResultTransformer(Transformers.aliasToBean(TotalRentsByCar.class));
+
+        return criteria.list();
+    }
+
 
     private List<ObjectNode> _toJson(List<Tuple> results) {
         List<ObjectNode> json = new ArrayList<>();
