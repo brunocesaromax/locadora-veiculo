@@ -9,10 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TemporalType;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
@@ -138,6 +135,28 @@ public class RentDAO {
         criteria.add(Restrictions.sqlRestriction("month(request_date) = ?", month.getValue(), StandardBasicTypes.INTEGER));
 
         return (BigDecimal) criteria.uniqueResult();
+    }
+
+    public void updateTotalValueOfRents(BigDecimal value) {
+       CriteriaBuilder builder = this.em.getCriteriaBuilder();
+       CriteriaUpdate<Rent> criteriaUpdate = builder.createCriteriaUpdate(Rent.class);
+       Root<Rent> root = criteriaUpdate.from(Rent.class);
+
+       criteriaUpdate.set(Rent_.TOTAL_VALUE, value);
+
+       Query query = this.em.createQuery(criteriaUpdate);
+       query.executeUpdate();
+    }
+
+    public void deleteRentsWithDeliveryDateBeforeBy(Date date) {
+        CriteriaBuilder builder = this.em.getCriteriaBuilder();
+        CriteriaDelete<Rent> criteriaDelete = builder.createCriteriaDelete(Rent.class);
+        Root<Rent> root = criteriaDelete.from(Rent.class);
+
+        criteriaDelete.where(builder.lessThan(root.get(Rent_.DELIVERY_DATE), date));
+
+        Query query = this.em.createQuery(criteriaDelete);
+        query.executeUpdate();
     }
 
     private Date getStartDeliveryDate(Date deliveryDate) {

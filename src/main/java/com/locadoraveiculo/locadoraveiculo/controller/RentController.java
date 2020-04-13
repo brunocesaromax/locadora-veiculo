@@ -62,9 +62,9 @@ public class RentController {
         return ResponseEntity.status(HttpStatus.OK).body(rentService.totalRentValueOfMonth(month));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
-        rentService.delete(id);
+    @PutMapping("/total-value")
+    public ResponseEntity<?> updateTotalValueOfRents(@RequestParam BigDecimal value) {
+        rentService.updateTotalValueOfRents(value);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
@@ -72,4 +72,17 @@ public class RentController {
     public ResponseEntity<Rent> update(@PathVariable Long id, @Valid @RequestBody Rent rent) {
         return ResponseEntity.status(HttpStatus.OK).body(rentService.update(id, rent));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+        rentService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/delivery-date-before")
+    public ResponseEntity deleteRentsWithDeliveryDateBeforeBy(@RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date date) {
+        rentService.deleteRentsWithDeliveryDateBeforeBy(date);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 }

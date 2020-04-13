@@ -68,6 +68,18 @@ public class RentServiceImpl implements RentService {
         return rentDAO.totalRentValueOfMonth(month);
     }
 
+    @Transactional
+    @Override
+    public void updateTotalValueOfRents(BigDecimal value) {
+        rentDAO.updateTotalValueOfRents(value);
+    }
+
+    @Transactional
+    @Override
+    public void deleteRentsWithDeliveryDateBeforeBy(Date date) {
+        rentDAO.deleteRentsWithDeliveryDateBeforeBy(date);
+    }
+
     @Override
     public BigDecimal sumTotalValue() {
         return rentDAO.sumTotalValue();

@@ -274,7 +274,6 @@ public class CarDAO {
         return criteria.list();
     }
 
-
     private List<ObjectNode> _toJson(List<Tuple> results) {
         List<ObjectNode> json = new ArrayList<>();
 

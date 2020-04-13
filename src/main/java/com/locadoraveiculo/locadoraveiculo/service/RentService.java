@@ -26,4 +26,8 @@ public interface RentService {
     List<Rent> findByDeliveryDateAndCarModelCriteria(Date deliveryDate, CarModel carModel);
 
     BigDecimal totalRentValueOfMonth(Month month);
+
+    void updateTotalValueOfRents(BigDecimal value);
+
+    void deleteRentsWithDeliveryDateBeforeBy(Date date);
 }
