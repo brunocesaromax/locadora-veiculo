@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.locadoraveiculo.locadoraveiculo.info.TotalRentsByCar;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
@@ -49,6 +50,8 @@ import java.util.Objects;
         @Index(columnList = "plate", unique = true),
         @Index(columnList = "plate, chassis")
 })
+/*Entidade não será muito atualizada*/
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Setter
 @Getter
 public class Car implements Serializable {
