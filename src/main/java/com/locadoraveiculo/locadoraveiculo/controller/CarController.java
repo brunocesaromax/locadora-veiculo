@@ -128,6 +128,11 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.OK).body(carService.findTotalRentsByCar());
     }
 
+    @GetMapping("/total-rents-by-car-jpa2.1")
+    public ResponseEntity<List<TotalRentsByCar>> findTotalRentsByCarWithSqlResultSetMapping() {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.findTotalRentsByCarWithSqlResultSetMapping());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         carService.delete(id);

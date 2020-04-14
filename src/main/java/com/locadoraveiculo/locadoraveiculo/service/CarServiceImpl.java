@@ -145,4 +145,9 @@ public class CarServiceImpl implements CarService {
     public List<TotalRentsByCar> findTotalRentsByCar() {
         return carDAO.findTotalRentsByCar();
     }
+
+    @Override
+    public List<TotalRentsByCar> findTotalRentsByCarWithSqlResultSetMapping() {
+        return carDAO.findTotalRentsByCarWithSqlResultSetMapping();
+    }
 }

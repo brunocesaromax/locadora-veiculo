@@ -274,6 +274,10 @@ public class CarDAO {
         return criteria.list();
     }
 
+    public List<TotalRentsByCar> findTotalRentsByCarWithSqlResultSetMapping() {
+        return this.em.createNamedQuery("Car.totalRentsByCar").getResultList();
+    }
+
     private List<ObjectNode> _toJson(List<Tuple> results) {
         List<ObjectNode> json = new ArrayList<>();
 

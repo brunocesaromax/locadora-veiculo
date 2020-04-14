@@ -1,6 +1,7 @@
 package com.locadoraveiculo.locadoraveiculo.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.locadoraveiculo.locadoraveiculo.info.TotalRentsByCar;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,9 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Setter
-@Getter
+
 /*Os nomes de namedQueries devem ser únicos no sistema,
  * Duas entidades não podem compartilhar o mesmo namedQuery name.
  * NamedQueries são mais utilizadas quando se sabe que a consulta dificilmente
@@ -26,6 +25,28 @@ import java.util.Objects;
         @NamedQuery(name = "Car.findAll", query = "select c from Car c inner join fetch c.carModel"),
         @NamedQuery(name = "Car.findByPlate", query = "select c from Car c where c.plate = :plate")
 })
+@NamedNativeQuery(
+        name = "Car.totalRentsByCar",
+        query = "select c.plate as plate, count(r.id) as totalRents " +
+                "from car c inner join rent r on c.id = r.car_id " +
+                "group by plate",
+        resultSetMapping = "totalRentsByCarMapping"
+)
+@SqlResultSetMapping(
+        name = "totalRentsByCarMapping",
+        classes = {
+                @ConstructorResult(
+                        targetClass = TotalRentsByCar.class,
+                        columns = {
+                                @ColumnResult(name = "plate", type = String.class),
+                                @ColumnResult(name = "totalRents", type = Long.class)
+                        }
+                )
+        }
+)
+@Entity
+@Setter
+@Getter
 public class Car implements Serializable {
 
     @Id

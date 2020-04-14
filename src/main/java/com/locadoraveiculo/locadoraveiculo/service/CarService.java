@@ -54,4 +54,6 @@ public interface CarService {
     List<Car> findAllCarNeverRented();
 
     List<TotalRentsByCar> findTotalRentsByCar();
+
+    List<TotalRentsByCar> findTotalRentsByCarWithSqlResultSetMapping();
 }
