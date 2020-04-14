@@ -45,6 +45,10 @@ import java.util.Objects;
         }
 )
 @Entity
+@Table(indexes = {
+        @Index(columnList = "plate", unique = true),
+        @Index(columnList = "plate, chassis")
+})
 @Setter
 @Getter
 public class Car implements Serializable {
