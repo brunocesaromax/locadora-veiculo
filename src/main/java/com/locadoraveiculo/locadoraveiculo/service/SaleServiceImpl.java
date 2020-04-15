@@ -19,6 +19,7 @@ public class SaleServiceImpl implements SaleService{
         return saleDAO.save(sale);
     }
 
+    @Transactional
     @Override
     public void remove(Long id) {
         saleDAO.delete(id);
