@@ -278,6 +278,19 @@ public class CarDAO {
         return this.em.createNamedQuery("Car.totalRentsByCar").getResultList();
     }
 
+    public void updateCarWithColorNotEqualsRed(Long carId) {
+        StoredProcedureQuery storedProcedureQuery = em.createStoredProcedureQuery("checkIfColorIsRed");
+        storedProcedureQuery.registerStoredProcedureParameter("id", Long.class, ParameterMode.IN);
+        storedProcedureQuery.setParameter("id", carId);
+        storedProcedureQuery.registerStoredProcedureParameter("oldColor", String.class, ParameterMode.OUT);
+
+        storedProcedureQuery.execute();
+
+        /*Parametros de saída após execução da procedure*/
+        String oldColor = (String) storedProcedureQuery.getOutputParameterValue("oldColor");
+        System.out.println(oldColor);
+    }
+
     private List<ObjectNode> _toJson(List<Tuple> results) {
         List<ObjectNode> json = new ArrayList<>();
 

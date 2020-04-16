@@ -144,6 +144,12 @@ public class CarController {
         return ResponseEntity.status(HttpStatus.OK).body(carService.update(id, car));
     }
 
+    @PutMapping("/{id}/change-to-color-red")
+    public ResponseEntity<Car> updateWithColorRed(@PathVariable Long id) {
+        carService.updateCarWithColorNotEqualsRed(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
     @PutMapping("/{id}/remove-first-rent")
     public ResponseEntity<Car> update(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(carService.removeFirstRentOfCar(id));

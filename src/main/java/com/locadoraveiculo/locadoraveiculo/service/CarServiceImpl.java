@@ -150,4 +150,10 @@ public class CarServiceImpl implements CarService {
     public List<TotalRentsByCar> findTotalRentsByCarWithSqlResultSetMapping() {
         return carDAO.findTotalRentsByCarWithSqlResultSetMapping();
     }
+
+    @Transactional
+    @Override
+    public void updateCarWithColorNotEqualsRed(Long carId) {
+        carDAO.updateCarWithColorNotEqualsRed(carId);
+    }
 }

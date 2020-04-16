@@ -56,4 +56,6 @@ public interface CarService {
     List<TotalRentsByCar> findTotalRentsByCar();
 
     List<TotalRentsByCar> findTotalRentsByCarWithSqlResultSetMapping();
+
+    void updateCarWithColorNotEqualsRed(Long carId);
 }
