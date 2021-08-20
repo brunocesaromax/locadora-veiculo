@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/accessories")
 @RequiredArgsConstructor
-@Api(tags = SwaggerConfig.VEHICLE_RENTAL)
+@Api(tags = SwaggerConfig.ACCESSORY_API_TAG)
 @Validated
 public class AccessoryController {
 

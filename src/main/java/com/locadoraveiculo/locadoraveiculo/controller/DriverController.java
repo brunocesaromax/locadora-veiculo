@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/drivers")
 @RequiredArgsConstructor
-@Api(tags = SwaggerConfig.VEHICLE_RENTAL)
+@Api(tags = SwaggerConfig.DRIVER_API_TAG)
 @Validated
 public class DriverController {
 

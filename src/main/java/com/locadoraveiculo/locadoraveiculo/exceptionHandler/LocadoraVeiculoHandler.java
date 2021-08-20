@@ -3,10 +3,9 @@ package com.locadoraveiculo.locadoraveiculo.exceptionHandler;
 import com.locadoraveiculo.locadoraveiculo.exception.CarModelException;
 import com.locadoraveiculo.locadoraveiculo.exception.NotFoundException;
 import com.locadoraveiculo.locadoraveiculo.exception.UniqueProducerNameException;
+import com.locadoraveiculo.locadoraveiculo.service.LocaleMessageSource;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +29,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LocadoraVeiculoHandler extends ResponseEntityExceptionHandler {
 
-    private final MessageSource messageSource;
+    private final LocaleMessageSource localeMessageSource;
 
     @ExceptionHandler({IllegalArgumentException.class, NoResultException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Object> handleConstraintViolationException(Exception ex, WebRequest request) {
-        String msgUser = messageSource.getMessage("resource.not-found", null, LocaleContextHolder.getLocale());
+        String msgUser = localeMessageSource.getMessage("resource.not-found");
         String msgDev = ex.toString();
         List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
 
@@ -55,7 +54,7 @@ public class LocadoraVeiculoHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({MethodArgumentTypeMismatchException.class})
     public ResponseEntity<Object> handleMethodArgumentTypeMismatchException(Exception ex, WebRequest request) {
-        String msgUser = messageSource.getMessage("fail.convert.types", null, LocaleContextHolder.getLocale());
+        String msgUser = localeMessageSource.getMessage("fail.convert.types");
         String msgDev = ex.toString();
         List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
 
@@ -64,7 +63,7 @@ public class LocadoraVeiculoHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({UniqueProducerNameException.class})
     public ResponseEntity<Object> handleUniqueProducerNameException(Exception ex, WebRequest request) {
-        String msgUser = messageSource.getMessage("Producer.unique.name", null, LocaleContextHolder.getLocale());
+        String msgUser = localeMessageSource.getMessage("Producer.unique.name");
         String msgDev = ex.toString();
         List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
 
@@ -73,7 +72,7 @@ public class LocadoraVeiculoHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({NotFoundException.class})
     public ResponseEntity<Object> handleNotFoundException(Exception ex, WebRequest request) {
-        String msgUser = messageSource.getMessage("resource.not-found", null, LocaleContextHolder.getLocale());
+        String msgUser = localeMessageSource.getMessage("resource.not-found");
         String msgDev = ex.toString();
         List<Error> errors = Collections.singletonList(new Error(msgUser, msgDev));
 
@@ -95,7 +94,7 @@ public class LocadoraVeiculoHandler extends ResponseEntityExceptionHandler {
 
 //		Retornar todos os errors nos campos do objeto
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            String msgUser = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
+            String msgUser = localeMessageSource.getMessage(fieldError);
             String msgDev = fieldError.toString();
             errors.add(new Error(msgUser, msgDev));
         }

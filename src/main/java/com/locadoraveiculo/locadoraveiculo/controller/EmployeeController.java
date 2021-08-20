@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/employees")
 @RequiredArgsConstructor
-@Api(tags = SwaggerConfig.VEHICLE_RENTAL)
+@Api(tags = SwaggerConfig.EMPLOYEE_API_TAG)
 @Validated
 public class EmployeeController {
 
