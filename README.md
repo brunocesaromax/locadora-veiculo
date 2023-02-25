@@ -3,8 +3,6 @@
 
 # Sobre o projeto
 
-Swagger API: https://locadora-veiculos-api.herokuapp.com/swagger-ui.html
-
 Simulador de locadora de veículos é uma aplicação na forma de uma API RESTful, construída durante o acompanhamento do curso __JPA e Hibernate__ da Algaworks.
 
 A aplicação consiste no gerenciamento de uma locadora de veículos, onde é possível gerir o cadastro dos veículos e clientes até o processo de locação.
